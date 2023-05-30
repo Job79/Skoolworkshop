@@ -15,6 +15,9 @@ const app = express()
     .use(express.static('public'))
     .get('/api/workshops', (req, res) => workshopController.get(req, res))
     .get('/api/products', (req, res) => productController.get(req, res))
+    .post('/api/products', (req, res) => productController.post(req, res))
+    .put('/api/products/:id', (req, res) => productController.put(req, res))
+    
 
 
 // catch-all routes, always return the index.html when route is not

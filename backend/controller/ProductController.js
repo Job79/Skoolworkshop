@@ -1,17 +1,21 @@
 export class ProductController {
-    constructor (db) {
-        this.db = db
+    constructor(prisma) {
+        this.prisma = prisma
     }
 
-    async get (req, res) {
-        const products = await this.db.product.findMany()
-        if (!products.length) {
+    /**
+     * GET /products
+     */
+    async get(req, res) {
+        const products = await this.prisma.product.findMany()
+        if (!products) {
             res.status(404).send({ message: 'No products found' })
             return
         }
 
         res.status(200).send(products)
     }
+
 
     /** 
      * POST /products
@@ -20,14 +24,14 @@ export class ProductController {
     async post(req, res) {
         const { name, stock, minStock } = req.body;
     
-        const createdProduct = await this.db.product.create({
+        const createdProduct = await this.prisma.product.create({
             data: {
                 name: name,
                 stock: stock,
                 minStock: minStock,
             },
         });
-        console.log('Created product:', createdProduct);
+
         res.status(201).send(createdProduct);
     }
 
@@ -38,13 +42,11 @@ export class ProductController {
         const { id } = req.params;
         const updatedProductData = req.body;
 
-        const updatedProduct = await this.db.product.update({
+        const updatedProduct = await this.prisma.product.update({
             where: { id: Number(id) },
             data: updatedProductData,
         });
 
         res.status(200).send(updatedProduct);
     }
-
-
 }
