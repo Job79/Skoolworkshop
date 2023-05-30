@@ -1,9 +1,9 @@
 export class ProductController {
-    constructor (db) {
+    constructor(db) {
         this.db = db
     }
 
-    async get (req, res) {
+    async get(req, res) {
         const products = await this.db.product.findMany()
         if (!products.length) {
             res.status(404).send({ message: 'No products found' })
@@ -18,8 +18,9 @@ export class ProductController {
      */
 
     async post(req, res) {
+        console.log(req.body);
         const { name, stock, minStock } = req.body;
-    
+
         const createdProduct = await this.db.product.create({
             data: {
                 name: name,
@@ -30,7 +31,6 @@ export class ProductController {
         console.log('Created product:', createdProduct);
         res.status(201).send(createdProduct);
     }
-
     /**
      * PUT /products/:id
      */
@@ -46,5 +46,13 @@ export class ProductController {
         res.status(200).send(updatedProduct);
     }
 
+    async getId(req, res) {
+        const { id } = req.params;
 
+        const product = await this.db.product.findFirst({
+            where: { id: Number(id) }
+        });
+        res.status(200).send(product);
+
+    }
 }

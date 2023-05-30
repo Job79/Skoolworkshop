@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-const Products = () => import ('../views/Products.vue')
-const Workshops = () => import ('../views/Workshops.vue')
-const CreateProduct = () => import ('../views/CreateProduct.vue')
-const UpdateProduct = () => import ('../views/UpdateProduct.vue')
+const Products = () => import('../views/Products.vue')
+const Workshops = () => import('../views/Workshops.vue')
+const CreateProduct = () => import('../views/CreateProduct.vue')
+const UpdateProduct = () => import('../views/UpdateProduct.vue')
 
 const routes = [
     {
@@ -23,7 +23,7 @@ const routes = [
         component: CreateProduct
     },
     {
-        path: '/products/:id',
+        path: '/updateproduct/:id',
         name: 'UpdateProduct',
         component: UpdateProduct
     }

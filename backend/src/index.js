@@ -15,6 +15,7 @@ const app = express()
     .use(express.static('public'))
     .get('/api/workshops', (req, res) => workshopController.get(req, res))
     .get('/api/products', (req, res) => productController.get(req, res))
+    .get('/api/products/:id', (req, res) => productController.getId(req, res))
     .post('/api/products', (req, res) => productController.post(req, res))
     .put('/api/products/:id', (req, res) => productController.put(req, res))
     

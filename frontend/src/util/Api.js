@@ -9,31 +9,18 @@ export class API {
      * @returns {Promise<{response: *, ok: boolean, status: number}>}
      */
     static async Req (method, url, { body = null, headers = new Headers() } = {}) {
-        try {
-            const response = await fetch(url, { headers, method, body })
-            const contentType = response.headers.get('content-type')
-    
-            let parsedResponse;
-            if (contentType && contentType.indexOf('application/json') !== -1) {
-                parsedResponse = await response.json();
-            } else {
-                parsedResponse = await response.text();
-            }
-    
-            return {
-                response: parsedResponse,
-                ok: response.ok,
-                status: response.status
-            }
-        } catch (error) {
-            console.error('Error during API request:', error);
-            return {
-                response: null,
-                ok: false,
-                status: 500,
-                error: error.message,
-            }
+        if (body) headers.append('Content-Type', 'application/json')
+        const response = await fetch(url, {
+            headers,
+            method,
+            body: body ? JSON.stringify(body) : undefined
+        })
+
+        const contentType = response.headers.get('content-type')
+        return {
+            response: contentType && contentType.indexOf('application/json') !== -1 ? await response.json() : await response.text(),
+            ok: response.ok,
+            status: response.status
         }
     }
-    
 }
