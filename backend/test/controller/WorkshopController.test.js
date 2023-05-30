@@ -3,7 +3,7 @@ import { expect } from 'chai'
 import sinon from 'sinon'
 import { WorkshopController } from '../../src/controller/WorkshopController.js'
 
-describe('WorkshopController', () => {
+describe('controller/WorkshopController', () => {
     const workshops = [
         { id: 1, name: 'Workshop 1', groupSize: 10 },
         { id: 2, name: 'Workshop 2', groupSize: 25 }
@@ -26,10 +26,85 @@ describe('WorkshopController', () => {
             const db = { workshop: { findMany: sinon.stub().returns([]) } }
             const controller = new WorkshopController(db)
 
-            await controller.get({}, res)
-            expect(db.workshop.findMany.calledOnce).to.be.true
-            expect(res.status.calledOnceWith(404)).to.be.true
-            expect(res.send.calledOnceWith({ message: 'No workshops found' })).to.be.true
+            try {
+                await controller.get({}, res)
+                expect.fail('should have thrown an error')
+            } catch (err) {
+                expect(err.message).to.equal('no workshops found')
+                expect(db.workshop.findMany.calledOnce).to.be.true
+            }
+        })
+    })
+
+    describe('put', () => {
+        it('should update a workshop', async () => {
+            const workshop = { ...workshops[0], name: 'Workshop 1 updated' }
+            const req = { params: { id: 1 }, body: workshop }
+            delete req.body.id
+
+            const res = { status: sinon.stub().returnsThis(), send: sinon.stub() }
+            const db = { workshop: { update: sinon.stub().returns(workshop) } }
+            const controller = new WorkshopController(db)
+
+            await controller.put(req, res)
+            expect(db.workshop.update.calledOnce).to.be.true
+            expect(res.status.calledOnceWith(200)).to.be.true
+            expect(res.send.calledOnceWith(workshop)).to.be.true
+        })
+
+        it('should return 404 when a workshop does not exist', async () => {
+            const error = new Error()
+            error.code = 'P2025'
+
+            const workshop = { ...workshops[0], name: 'Workshop 1 updated' }
+            const req = { params: { id: 1 }, body: workshop }
+            delete req.body.id
+
+            const res = { status: sinon.stub().returnsThis(), send: sinon.stub() }
+            const db = { workshop: { update: sinon.stub().throws(error) } }
+            const controller = new WorkshopController(db)
+
+            try {
+                await controller.put(req, res)
+                expect.fail('should have thrown an error')
+            } catch (err) {
+                expect(db.workshop.update.calledOnce).to.be.true
+                expect(err.message).to.equal('workshop not found')
+                expect(err.status).to.equal(404)
+            }
+        })
+    })
+
+    describe('delete', () => {
+        it('should delete a workshop', async () => {
+            const req = { params: { id: 1 } }
+            const res = { status: sinon.stub().returnsThis(), send: sinon.stub() }
+            const db = { workshop: { delete: sinon.stub() } }
+            const controller = new WorkshopController(db)
+
+            await controller.delete(req, res)
+            expect(db.workshop.delete.calledOnce).to.be.true
+            expect(res.status.calledOnceWith(200)).to.be.true
+            expect(res.send.calledOnceWith({ message: 'workshop removed' })).to.be.true
+        })
+
+        it('should return 404 when a workshop does not exist', async () => {
+            const error = new Error()
+            error.code = 'P2025'
+
+            const req = { params: { id: 1 } }
+            const res = { status: sinon.stub().returnsThis(), send: sinon.stub() }
+            const db = { workshop: { delete: sinon.stub().throws(error) } }
+            const controller = new WorkshopController(db)
+
+            try {
+                await controller.delete(req, res)
+                expect.fail('should have thrown an error')
+            } catch (err) {
+                expect(db.workshop.delete.calledOnce).to.be.true
+                expect(err.message).to.equal('workshop not found')
+                expect(err.status).to.equal(404)
+            }
         })
     })
 })
