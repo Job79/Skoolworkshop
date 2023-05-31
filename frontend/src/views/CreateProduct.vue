@@ -1,3 +1,5 @@
+
+
 <script setup>
 import { ref } from 'vue'
 import { useProductStore } from '../store/productStore.js'
@@ -8,11 +10,21 @@ const productStore = useProductStore()
 
 const product = ref({
     name: '',
-    stock: '',
-    minStock: ''
+    stock: 0,
+    minStock: 0
 })
 
 const message = ref('')
+
+const increment = (field) => {
+  product.value[field] += 1;
+}
+
+const decrement = (field) => {
+  if(product.value[field] > 0) {
+    product.value[field] -= 1;
+  }
+}
 
 const submitForm = (e) => {
     e.preventDefault()
@@ -33,25 +45,41 @@ const submitForm = (e) => {
 </script>
 
 <template>
-    <div class="vh-100 d-flex flex-column justify-content-center align-items-center" style="background-color: #F0F0F0;">
+    <div class="vh-100 d-flex flex-column justify-content-center align-items-center" style="background-color: #ffffff;">
       <h1 class="mb-4 text-center">Add Product</h1>
-      <form class="col-lg-6" @submit.prevent="submitForm">
-        <div class="mb-4">
-          <input type="text" class="form-control form-control-lg" id="name" v-model="product.name" placeholder="Name">
-        </div>
+      <div class="card col-lg-6 p-4">
+        <form @submit.prevent="submitForm">
+          <div class="mb-4 form-floating">
+            <input type="text" class="form-control form-control-lg" id="name" v-model="product.name" placeholder="Name">
+            <label for="name">Name</label>
+          </div>
 
-        <div class="mb-4">
-          <input type="number" class="form-control form-control-lg" id="stock" v-model="product.stock" placeholder="Stock" min="0">
-        </div>
+          <div class="mb-4">
+            <label class="form-label">Stock</label>
+            <div class="def-number-input number-input safari_only">
+              <button @click="decrement('stock')" class="minus btn btn-outline-secondary"></button>
+              <input class="quantity form-control" min="0" name="quantity" type="number" v-model.number="product.stock">
+              <button @click="increment('stock')" class="plus btn btn-outline-secondary"></button>
+            </div>
+          </div>
 
-        <div class="mb-4">
-          <input type="number" class="form-control form-control-lg" id="minStock" v-model="product.minStock" placeholder="Minimum Stock"  min="0">
-        </div>
+          <div class="mb-4">
+            <label class="form-label">Minimum Stock</label>
+            <div class="def-number-input number-input safari_only">
+              <button @click="decrement('minStock')" class="minus btn btn-outline-secondary"></button>
+              <input class="quantity form-control" min="0" name="quantity" type="number" v-model.number="product.minStock">
+              <button @click="increment('minStock')" class="plus btn btn-outline-secondary"></button>
+            </div>
+          </div>
 
-        <!-- Display validation message -->
-        <p class="text-danger">{{ message }}</p>
+          <!-- Display validation message -->
+          <p class="text-danger">{{ message }}</p>
 
-        <button type="submit" class="btn btn-primary btn-lg w-100">Add Product</button>
-      </form>
+          <button type="submit" class="btn btn-primary btn-lg w-100 rounded-pill">Add Product</button>
+        </form>
+      </div>
     </div>
-  </template>
+</template>
+
+
+
