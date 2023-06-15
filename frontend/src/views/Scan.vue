@@ -26,15 +26,20 @@ function onDecode (result) {
 </script>
 
 <template>
-  <div class="d-flex justify-content-center">
-    <h2 class="pt-4">Scan QR/Barcode</h2>
-    <div class="position-absolute d-flex flex-column">
-      <div class="position-relative pe-3">
-        <div type="button" class="btn float-end hover-darken mt-4 mb-4" @click="router.back">
-          <font-awesome-icon :icon="['fas', 'x']"/>
-        </div>
-      </div>
-      <stream-barcode-reader @decode="onDecode" class="ps-3 pe-3"/>
+    <div class="row box-header">
+    <div class="d-flex align-items-center m-0" style="width: min-content">
+      <a class="btn p-2 bg-secondary hover-darken" @click="$router.back()">
+        <font-awesome-icon :icon="['fas', 'caret-left']" class="fa-xl" style="width: 24px"/>
+      </a>
+    </div>
+
+    <div class="col d-flex align-items-center">
+      <h3 class="m-0">Scan A QR / Barcode</h3>
     </div>
   </div>
+
+  <div class="row box bg-white border-top ">
+    <stream-barcode-reader @decode="onDecode" class="p-0 mb-n2"/>
+  </div>
+
 </template>
