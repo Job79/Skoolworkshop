@@ -73,4 +73,18 @@ export class ProductController {
             throw new HttpError(500, 'could not delete product')
         }
     }
+
+    async workshops (req, res) {
+        const id = req.params.id
+        const product = await this.db.product.findUnique({
+            where: { id: parseInt(id) },
+            include: { workshopItems: true }
+        })
+
+        if (!product) {
+            throw new HttpError(404, 'product not found')
+        }
+
+        res.status(200).send(product.workshopItems)
+    }
 }
