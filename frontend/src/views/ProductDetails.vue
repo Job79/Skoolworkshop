@@ -1,19 +1,53 @@
 <script setup>
+import { watch, ref } from 'vue'
 import { useProductStore } from '../store/productStore.js'
+import { useWorkshopStore } from '../store/workshopStore.js'
+import { useCalendarStore } from '../store/calendarStore.js'
 import { useRoute } from 'vue-router'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import TextInput from '../component/input/TextInput.vue'
 import CheckboxInput from '../component/input/CheckboxInput.vue'
 import ScanInput from '../component/input/ScanInput.vue'
-import { ref } from 'vue'
 import NumberInput from '../component/input/NumberInput.vue'
 import UrlInput from '../component/input/UrlInput.vue'
+import WorkshopBlock from "../component/workshop/WorkshopBlock.vue";
 
 const route = useRoute()
 const productStore = useProductStore()
+const calendarStore = useCalendarStore()
+const workshopStore = useWorkshopStore()
 
 const productId = Number(route.params.id)
-const product = ref(await productStore.get(productId))
+const workshopsInCalendar = ref([])
+
+const product = ref(null)
+
+const load = async () => {
+    product.value = await productStore.get(productId)
+    const workshops = await productStore.getWorkshops(productId)
+
+    if (workshops.length > 0) {
+        workshopsInCalendar.value = await Promise.all(workshops.map(async workshop => {
+            const workshopDetail = await workshopStore.get(workshop.workshopId)
+            return { ...workshop, ...workshopDetail }
+        }))
+
+        watch(() => calendarStore.calendarItems, async (newVal) => {
+            workshopsInCalendar.value = await Promise.all(newVal.map(async event => {
+                const workshop = workshops.find(w => w.workshopId === event.workshopId)
+                if (workshop) {
+                    const workshopDetail = await workshopStore.get(workshop.workshopId)
+                    return { ...workshop, ...workshopDetail }
+                }
+                return null
+            })).then(res => res.filter(item => item)) // filter out null values
+        }, { immediate: true })
+    }
+
+    await calendarStore.fetch()
+}
+
+load()
 
 async function save () {
     const { id, ...data } = product.value
@@ -22,6 +56,7 @@ async function save () {
 </script>
 
 <template>
+      <div v-if="product">
   <div class="row box-header">
     <div class="d-flex align-items-center m-0" style="width: min-content">
       <a class="btn p-2 bg-secondary hover-darken" @click="$router.back()">
@@ -50,4 +85,8 @@ async function save () {
 
     <scan-input v-model:value="product.code" @update:value="save"/>
   </div>
+  <div class="row box bg-white border-top">
+    <workshop-block v-for="workshop in workshopsInCalendar" :workshop="workshop" :key="workshopId"/>
+  </div>
+</div>
 </template>
