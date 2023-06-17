@@ -1,6 +1,6 @@
 <script setup>
 import { useProductStore } from '../store/productStore.js'
-import { useRouter } from 'vue-router'
+import {useRoute, useRouter} from 'vue-router'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import TextInput from '../component/input/TextInput.vue'
 import NumberInput from '../component/input/NumberInput.vue'
@@ -8,9 +8,12 @@ import CheckboxInput from '../component/input/CheckboxInput.vue'
 import { ref } from 'vue'
 import ScanInput from '../component/input/ScanInput.vue'
 import UrlInput from '../component/input/UrlInput.vue'
+import {useWorkshopItemStore} from "../store/workshopItemStore.js";
 
+const route = useRoute()
 const router = useRouter()
 const productStore = useProductStore()
+const workshopItemStore = useWorkshopItemStore()
 
 const product = ref({
     name: '',
@@ -22,7 +25,18 @@ const product = ref({
 
 async function create () {
     if (product.value.name === '') throw new Error('name is empty')
-    await productStore.create(product.value)
+    const { id } = await productStore.create(product.value)
+
+    const workshopId = route.query.workshopId
+    if (workshopId) {
+      await workshopItemStore.create({
+        workshopId: Number(workshopId),
+        productId: id,
+        people: 1,
+        quantity: 1
+      })
+    }
+
     await router.back()
 }
 </script>
