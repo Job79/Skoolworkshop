@@ -62,6 +62,9 @@ async function saveItem (item) {
 
     <div class="col-10 d-flex align-items-center justify-content-end">
       <!-- action buttons -->
+      <router-link class="btn p-3 hover-darken" :to="`/products/new?workshopId=${workshop.id}`">
+        <font-awesome-icon :icon="['fas', 'plus']" class="fa-xl"/>
+      </router-link>
       <router-link class="btn p-3 hover-darken" :to="`/workshops/${workshop.id}/items`">
         <font-awesome-icon :icon="['fas', 'pen-to-square']" class="fa-xl"/>
       </router-link>

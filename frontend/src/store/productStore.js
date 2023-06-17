@@ -36,6 +36,7 @@ export const useProductStore = defineStore('product', {
             try {
                 const { data } = await axios.post('/api/products', product)
                 this.products.push(data)
+                return data
             } catch (err) {
                 throw new Error(err.response.data.error)
             }

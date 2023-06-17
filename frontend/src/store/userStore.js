@@ -36,6 +36,7 @@ export const useUserStore = defineStore('user', {
             try {
                 const { data } = await axios.post('/api/users', user)
                 this.users.push(data)
+                return data
             } catch (err) {
                 throw new Error(err.response.data.error)
             }

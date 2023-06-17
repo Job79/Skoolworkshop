@@ -36,6 +36,7 @@ export const useWorkshopStore = defineStore('workshop', {
             try {
                 const { data } = await axios.post('/api/workshops', workshop)
                 this.workshops.push(data)
+                return data
             } catch (err) {
                 throw new Error(err.response.data.error)
             }

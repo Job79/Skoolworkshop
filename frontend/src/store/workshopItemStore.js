@@ -26,6 +26,7 @@ export const useWorkshopItemStore = defineStore('workshopItem', {
                 if (this.cache[workshopItem.workshopId]) {
                     this.cache[workshopItem.workshopId].push(data)
                 }
+                return data
             } catch (err) {
                 throw new Error(err.response.data.error)
             }

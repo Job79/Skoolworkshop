@@ -5,8 +5,8 @@ import { WorkshopItemController } from '../../src/controller/WorkshopItemControl
 
 describe('controller/WorkshopItemController', () => {
     const workshopItems = [
-        { id: 1, workshopId: 1, productId: 1, quantity: 10 },
-        { id: 2, workshopId: 1, productId: 2, quantity: 20 }
+        { id: 1, workshopId: 1, productId: 1, quantity: 10, people: 3 },
+        { id: 2, workshopId: 1, productId: 2, quantity: 20, people: 5 }
     ]
 
     describe('all', () => {

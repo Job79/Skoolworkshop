@@ -8,6 +8,7 @@ describe('controller/request/workshop/PostWorkshopItemRequest', () => {
             body: {
                 workshopId: 1,
                 productId: 1,
+                people: 1,
                 quantity: 10
             }
         }
