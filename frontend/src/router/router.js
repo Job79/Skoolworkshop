@@ -9,8 +9,7 @@ const routes = [
         component: () => import('../views/Login.vue')
     },
     {
-        path: '/',
-        alias: '/workshops',
+        path: '/workshops',
         name: 'workshops',
         meta: { nav: 'workshop' },
         component: () => import('../views/Workshops.vue')
@@ -36,6 +35,7 @@ const routes = [
     },
     {
         path: '/products',
+        alias: '/',
         name: 'products',
         meta: { nav: 'product' },
         component: () => import('../views/Products.vue')
