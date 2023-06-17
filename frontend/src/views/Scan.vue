@@ -1,9 +1,9 @@
 <script setup>
-import {useProductStore} from '../store/productStore.js'
-import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome'
-import {StreamBarcodeReader} from 'vue-barcode-reader'
+import { useProductStore } from '../store/productStore.js'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { StreamBarcodeReader } from 'vue-barcode-reader'
 import router from '../router/router.js'
-import {useRoute} from 'vue-router'
+import { useRoute } from 'vue-router'
 
 const productStore = useProductStore()
 productStore.fetch()
@@ -11,17 +11,17 @@ productStore.fetch()
 const route = useRoute()
 const action = route.params.action
 
-function onDecode(result) {
-  const product = productStore.findCode(result)
-  if (!product) {
-    throw Error('unknown product')
-  }
+function onDecode (result) {
+    const product = productStore.findCode(result)
+    if (!product) {
+        throw Error('unknown product')
+    }
 
-  if (action === 'redirect') {
-    router.push(`/products/${product.id}`)
-  } else {
-    router.push(`/products/${product.id}`)
-  }
+    if (action === 'redirect') {
+        router.push(`/products/${product.id}`)
+    } else {
+        router.push(`/products/${product.id}`)
+    }
 }
 </script>
 
