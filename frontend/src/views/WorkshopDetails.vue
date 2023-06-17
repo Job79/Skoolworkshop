@@ -25,6 +25,7 @@ const tasks = await Promise.all([
 const workshop = ref(tasks[0])
 const items = tasks[1]
 const products = productStore.getMany(items.map(item => item.productId))
+const amountOfPeople = ref(0)
 
 async function save () {
     const { id, ...data } = workshop.value
@@ -42,16 +43,17 @@ async function saveProduct (product) {
 }
 
 function removeAllProducts () {
-  for(let i = 0; i < products.length; i++) {
-    products[i].stock -= items[i].people
-    if(products[i].stock < 0) {
-      products[i].stock = 0
-      showPopup.value = false
-      throw Error(products[i].name + ' heeft niet genoeg voorraad')
+    for (let i = 0; i < products.length; i++) {
+        products[i].stock -= Math.round(amountOfPeople.value / (items[i].people / items[i].quantity))
+        console.log(Math.round(amountOfPeople.value / (items[i].people / items[i].quantity)))
+        if (products[i].stock < 0) {
+            products[i].stock = 0
+            showPopup.value = false
+            throw Error(products[i].name + ' heeft niet genoeg voorraad')
+        }
+        saveProduct(products[i])
     }
-    saveProduct(products[i])
-  }
-  showPopup.value = false
+    showPopup.value = false
 }
 </script>
 
@@ -95,10 +97,10 @@ function removeAllProducts () {
 
   <!-- conformation pop up -->
   <div v-if="showPopup" class="conformation-popup">
-    <h2>Weet je het zeker?</h2>
-    <p>Voor alle producten zal de voorraad eraf worden gehaald</p>
-    <div type="button" class="btn btn-danger me-4" @click="showPopup = false">Nee</div>
-    <div type="button" class="btn btn-primary ms-4" @click="removeAllProducts">Ja</div>
+    <h2>Hoeveel personen?</h2>
+    <number-input name="Aantal mensen" v-model:value="amountOfPeople" class="mb-3"/>
+    <div type="button" class="btn btn-danger me-4" @click="showPopup = false">Annuleren</div>
+    <div type="button" class="btn btn-primary ms-4" @click="removeAllProducts" style="color: white">Accepteren</div>
   </div>
 
   <div class="row box bg-white border-top">
