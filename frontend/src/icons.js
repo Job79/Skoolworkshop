@@ -27,7 +27,8 @@ import {
     faPrint,
     faLayerGroup,
     faCalendarDay,
-    faArrowsRotate
+    faArrowsRotate,
+    faShuffle
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -58,5 +59,6 @@ library.add(
     faPrint,
     faLayerGroup,
     faCalendarDay,
-    faArrowsRotate
+    faArrowsRotate,
+    faShuffle
 )
