@@ -74,17 +74,33 @@ export class ProductController {
         }
     }
 
-    async workshops (req, res) {
+    async items (req, res) {
         const id = req.params.id
-        const product = await this.db.product.findUnique({
-            where: { id: parseInt(id) },
-            include: { workshopItems: true }
+        const items = await this.db.workshopItem.findMany({
+            where: { productId: parseInt(id) }
         })
 
-        if (!product) {
-            throw new HttpError(404, 'product not found')
-        }
+        res.status(200).send(items)
+    }
 
-        res.status(200).send(product.workshopItems)
+    async calendar (req, res) {
+        const id = req.params.id
+
+        const calendar = await this.db.calendar.findMany({
+            where: {
+                workshop: {
+                    items: {
+                        some: {
+                            productId: parseInt(id)
+                        }
+                    }
+                }
+            },
+            orderBy: {
+                startDate: 'asc'
+            }
+        })
+
+        res.status(200).send(calendar)
     }
 }

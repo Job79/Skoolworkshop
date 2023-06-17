@@ -157,4 +157,24 @@ describe('controller/ProductController', () => {
             }
         })
     })
+
+    describe('items', () => {
+        it('should return a list of workshop items', async () => {
+            const items = [{
+                id: 1,
+                productId: 1,
+                workshopId: 1,
+                quantity: 2
+            }]
+            const res = { status: sinon.stub().returnsThis(), send: sinon.stub() }
+            const req = { params: { id: 1 } }
+            const db = { workshopItem: { findMany: sinon.stub().returns(items) } }
+            const controller = new ProductController(db)
+
+            await controller.items(req, res)
+            expect(db.workshopItem.findMany.calledOnceWith({ where: { productId: 1 } })).to.be.true
+            expect(res.status.calledOnceWith(200)).to.be.true
+            expect(res.send.calledOnceWith(items)).to.be.true
+        })
+    })
 })
