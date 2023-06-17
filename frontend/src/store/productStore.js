@@ -61,15 +61,6 @@ export const useProductStore = defineStore('product', {
             }
         },
 
-        async getWorkshops (id) {
-            try {
-                const { data } = await axios.get(`/api/products/${id}/workshops`)
-                return data
-            } catch (err) {
-                throw new Error(err.response.data.error)
-            }
-        },
-
         getMany (ids) {
             return this.products.filter(item => ids.includes(item.id))
         },

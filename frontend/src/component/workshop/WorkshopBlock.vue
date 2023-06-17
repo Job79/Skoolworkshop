@@ -24,8 +24,7 @@ const props = defineProps({
     <span class="h5"> {{ props.workshop.name }} </span>
 
     <div v-if="!props.edit" class="ms-auto">
-      <!-- workshop stock status -->
-      <font-awesome-icon :icon="['fas', 'check']" class="fa-1x rounded-circle p-1 m-4 bg-success text-white" style="width:20px;height:20px;"/>
+      <slot />
     </div>
     <div v-else class="ms-auto">
       <!-- edit mode buttons -->

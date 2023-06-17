@@ -54,7 +54,7 @@ async function saveItem (item) {
     <number-input name="Standaard Groepsgrootte" v-model:value="workshop.defaultGroupSize" @update:value="save"/>
   </div>
 
-  <!-- items -->
+  <!-- products -->
   <div class="row box-header">
     <div class="col-2 d-flex align-items-center">
       <h3 class="m-2">Producten</h3>
