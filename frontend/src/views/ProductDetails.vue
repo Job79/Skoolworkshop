@@ -45,8 +45,8 @@ function printQr () {
   </div>
 
   <div class="row box bg-white border-top">
-    <text-input name="Name" v-model:value="product.name" @update:value="save"/>
-    <number-input name="Vooraad" v-model:value="product.stock" @update:value="save">
+    <text-input name="Naam" v-model:value="product.name" @update:value="save"/>
+    <number-input name="Voorraad" v-model:value="product.stock" @update:value="save">
       <router-link class="d-flex align-items-center user-select-none" role="button" :to='`/products/${productId}/edit-stock`'>
         <font-awesome-icon
             :icon="['fas', 'layer-group']"
@@ -55,7 +55,7 @@ function printQr () {
     </number-input>
 
     <number-input name="Buffer Voorraad" v-model:value="product.bufferStock" @update:value="save" :border="true" />
-    <checkbox-input name="Reusable" v-model:value="product.reusable" @update:value="save"/>
+    <checkbox-input name="Herbruikbaar" v-model:value="product.reusable" @update:value="save"/>
 
     <scan-input v-model:value="product.code" @update:value="save"/>
     <div class="d-flex align-items-center p-2 border-bottom">

@@ -18,7 +18,7 @@ const workshops = workshopStore.workshops
 <template>
   <div class="row box-header">
     <div class="col-2 d-flex align-items-center">
-      <h3 class="m-2">Calendar</h3>
+      <h3 class="m-2">Kalender</h3>
     </div>
 
     <div class="col-10 d-flex align-items-center justify-content-end">

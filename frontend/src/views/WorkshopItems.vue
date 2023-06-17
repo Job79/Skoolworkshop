@@ -51,7 +51,7 @@ async function remove (workshopItem) {
 
   <div class="row box bg-white border-top">
     <div class="p-0 input-group align-items-end">
-      <input type="text" v-model="query" placeholder="Search products..." class="form-control search p-4">
+      <input type="text" v-model="query" placeholder="Zoek producten..." class="form-control search p-4">
     </div>
 
     <!-- product list -->

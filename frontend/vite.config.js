@@ -8,8 +8,8 @@ export default defineConfig({
     plugins: [vue(), VitePWA({
         includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
         manifest: {
-            name: 'Warehouse',
-            short_name: 'Warehouse',
+            name: 'SkoolMagazijn',
+            short_name: 'Magazijn',
             start_url: '/',
             icons: [
                 {

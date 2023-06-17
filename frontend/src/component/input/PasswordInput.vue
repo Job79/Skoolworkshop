@@ -41,9 +41,9 @@ function update () {
 }
 
 function focusOut () {
-  setTimeout(() => {
-    if (edit.value) update()
-  }, 100)
+    setTimeout(() => {
+        if (edit.value) update()
+    }, 100)
 }
 </script>
 

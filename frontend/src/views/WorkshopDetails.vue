@@ -49,7 +49,7 @@ async function saveItem (item) {
   </div>
 
   <div class="row box bg-white border-top">
-    <text-input name="Name" v-model:value="workshop.name" @update:value="save"/>
+    <text-input name="Naam" v-model:value="workshop.name" @update:value="save"/>
   </div>
 
   <!-- items -->

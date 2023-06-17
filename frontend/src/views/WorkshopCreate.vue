@@ -33,7 +33,7 @@ async function create () {
   </div>
 
   <div class="row box bg-white border-top">
-    <text-input name="Name" v-model:value="workshop.name" />
+    <text-input name="Naam" v-model:value="workshop.name" />
 
     <button class="m-3 ms-auto btn p-2 bg-primary d-flex justify-content-center" @click="create" style="width: 10rem">
       <font-awesome-icon :icon="['fas', 'floppy-disk']" class="fa-xl" />
