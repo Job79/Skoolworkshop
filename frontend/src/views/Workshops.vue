@@ -44,6 +44,10 @@ async function remove (workshop) {
                   :key="workshop.id"
                   :workshop="workshop"
                   :edit="edit"
-                  @delete="remove"/>
+                  @delete="remove" />
+
+    <div v-if="!filteredWorkshops.length" class="d-flex align-items-center justify-content-center border-bottom">
+      <span class="h6 m-4">Geen workshops gevonden</span>
+    </div>
   </div>
 </template>

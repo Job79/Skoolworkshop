@@ -37,5 +37,9 @@ const workshops = workshopStore.workshops
         :key="item.id"
         :item="item"
         :workshop="workshops.find(w => w.id === item.workshopId)" />
+
+    <div v-if="!calendarStore.calendarItems.length" class="d-flex align-items-center justify-content-center border-bottom">
+      <span class="h6 m-4">Kalender is leeg</span>
+    </div>
   </div>
 </template>

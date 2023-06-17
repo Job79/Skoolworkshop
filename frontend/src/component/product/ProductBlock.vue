@@ -42,8 +42,10 @@ const stockColor = computed(() => {
 
     <div v-if="!props.edit" class="ms-auto">
       <div class="p-3 rounded-circle" :class="stockColor">
-        <font-awesome-icon :icon="['fas', 'warehouse']" class="fa-1x" />
-        <span class="p-2">{{ props.product.stock }}</span>
+        <font-awesome-icon :icon="['fas', 'warehouse']" class="fa-1x px-2" />
+        <span class="p-1">{{ props.product.stock }}</span>
+        <span class="p-1">/</span>
+        <span class="p-1">{{ props.requiredStock + props.product.bufferStock }}</span>
       </div>
     </div>
     <div v-else class="ms-auto">

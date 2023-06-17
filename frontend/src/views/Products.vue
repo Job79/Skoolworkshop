@@ -74,5 +74,9 @@ async function remove (product) {
         :edit="edit"
         :requiredStock="calendarStore.requiredStock[product.id]?.quantity ?? null"
         @delete="remove"/>
+
+    <div v-if="!products.length" class="d-flex align-items-center justify-content-center border-bottom">
+      <span class="h6 m-4">Geen producten gevonden</span>
+    </div>
   </div>
 </template>

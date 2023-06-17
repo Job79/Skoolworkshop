@@ -29,7 +29,8 @@ import {
     faCalendarDay,
     faArrowsRotate,
     faShuffle,
-    faExternalLinkAlt
+    faExternalLinkAlt,
+    faRepeat
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -62,5 +63,6 @@ library.add(
     faCalendarDay,
     faArrowsRotate,
     faShuffle,
-    faExternalLinkAlt
+    faExternalLinkAlt,
+    faRepeat
 )

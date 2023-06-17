@@ -16,6 +16,11 @@ const props = defineProps({
     }
 })
 
+const date = new Date(props.item.endDate)
+const today = new Date()
+const nextMonth = new Date()
+nextMonth.setMonth(nextMonth.getMonth() + 1)
+
 function formatDate (startDate, endDate) {
     const ds = new Date(startDate)
     const de = new Date(endDate)
@@ -25,8 +30,9 @@ function formatDate (startDate, endDate) {
 </script>
 
 <template>
-  <div class="d-flex align-items-center border-bottom hover-darken"
-       :class="{'bg-tint-secondary': new Date(item.endDate) < new Date()}">
+  <router-link class="d-flex align-items-center border-bottom hover-darken"
+       :class="{'bg-tint-secondary': date < today || date > nextMonth}"
+       :to="`/workshops/${workshop.id}`">
 
     <!-- image and title -->
     <font-awesome-icon :icon="['fas', 'people-robbery']" class="fa-3x img border p-3 ms-1 me-3 my-3"
@@ -41,10 +47,10 @@ function formatDate (startDate, endDate) {
         </span>
       </div>
 
-      <div class="ms-auto d-flex align-items-center" :class="{'text-danger': new Date(item.endDate) < new Date()}">
+      <div class="ms-auto d-flex align-items-center" :class="{'text-danger': date < today, 'text-primary': date > nextMonth}">
         <font-awesome-icon :icon="['fas', 'calendar-day']" class="fa-1x" style="width: 2rem"/>
         <span>{{ formatDate(props.item.startDate, props.item.endDate) }}</span>
       </div>
     </div>
-  </div>
+  </router-link>
 </template>

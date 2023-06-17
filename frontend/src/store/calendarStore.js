@@ -27,12 +27,21 @@ export const useCalendarStore = defineStore('calendar', {
             }
         },
 
-        async fetchRequiredStock (force = false) {
+        async fetchRequiredStock () {
             try {
                 const { data } = await axios.get(`/api/calendar/requiredStock?startDate=${this.startDate.toISOString()}&endDate=${this.endDate.toISOString()}`)
                 this.requiredStock = data
             } catch {
                 this.requiredStock = {}
+            }
+        },
+
+        async byProduct (productId) {
+            try {
+                const { data } = await axios.get(`/api/products/${productId}/calendar`)
+                return data
+            } catch {
+                return []
             }
         },
 

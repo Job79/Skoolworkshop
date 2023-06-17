@@ -66,6 +66,8 @@ app
 app
     .get('/api/products', middleware.auth.validate(), (req, res) => controller.product.all(req, res))
     .get('/api/products/:id', middleware.auth.validate(), (req, res) => controller.product.get(req, res))
+    .get('/api/products/:id/items', middleware.auth.validate(), (req, res) => controller.product.items(req, res))
+    .get('/api/products/:id/calendar', middleware.auth.validate(), (req, res) => controller.product.calendar(req, res))
     .post('/api/products', middleware.auth.validate(), (req, res) => controller.product.post(req, res))
     .put('/api/products/:id', middleware.auth.validate(), (req, res) => controller.product.put(req, res))
     .delete('/api/products/:id', middleware.auth.validate(['admin', 'user']), (req, res) => controller.product.delete(req, res))
