@@ -13,14 +13,14 @@ const action = route.params.action
 
 function onDecode (result) {
     const product = productStore.findCode(result)
-    if (product) {
-        if (action === 'to-product') {
-            router.push('/products/' + product.id)
-        } else {
-            router.push('/products/' + product.id + '/edit-stock')
-        }
-    } else {
+    if (!product) {
         throw Error('unknown product')
+    }
+
+    if (action === 'redirect') {
+        router.push(`/products/${product.id}`)
+    } else {
+        router.push(`/products/${product.id}`)
     }
 }
 </script>

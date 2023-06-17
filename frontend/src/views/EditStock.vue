@@ -9,24 +9,27 @@ const route = useRoute()
 const productStore = useProductStore()
 
 const productId = Number(route.params.id)
-const productFound = await productStore.get(productId)
+const product = await productStore.get(productId)
 const amount = ref(0)
 
 async function update () {
-    const { id, ...data } = productFound
+    product.stock += amount.value
+
+    const { id, ...data } = product
     await productStore.update(data, id)
+    router.back()
 }
 </script>
 
 <template>
   <div class="popup-container box text-center bg-white justify-content-center">
     <router-link type="button" class="btn float-start hover-darken" :to="`/products/${productId}`">
-      <font-awesome-icon :icon="['fas', 'box']"/>
+      <font-awesome-icon :icon="['fas', 'box']" class="p-2" />
     </router-link>
     <div type="button" class="btn float-end hover-darken" @click="router.back">
       <font-awesome-icon :icon="['fas', 'x']" />
     </div>
-    <h3 class="pb-3 me-5">{{ productFound.name }}</h3>
+    <h3 class="pb-3 me-5">{{ product.name }}</h3>
     <div class="d-flex justify-content-center align-items-center pb-3">
       <div class="me-5 iconDivMin">
         <p class="mb-0">10</p>
@@ -47,10 +50,7 @@ async function update () {
       </div>
     </div>
 
-    <div style="width: 100%" type="button" class="btn btn-primary" v-if="amount >= 0" @click="productFound.stock += amount; update(); router.back()">
-      Opslaan
-    </div>
-    <div style="width: 100%" type="button" class="btn btn-primary" v-else @click="productFound.stock += amount; update(); router.back()">
+    <div type="button" class="btn btn-primary w-100" @click="update">
       Opslaan
     </div>
   </div>

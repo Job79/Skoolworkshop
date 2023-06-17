@@ -11,10 +11,6 @@ const props = defineProps({
     value: {
         type: Number,
         default: 1
-    },
-    border: {
-        type: Boolean,
-        default: true
     }
 })
 
@@ -31,10 +27,12 @@ function update () {
 </script>
 
 <template>
-  <div class="d-flex align-items-center p-2" v-bind:class="(border)?'border-bottom':''">
+  <div class="d-flex align-items-center p-2 border-bottom">
     <span class="mx-3">{{ name }}</span>
 
     <div class="ms-auto d-flex align-items-center">
+      <slot />
+
       <div role="button" @click="value = Math.max(value - 1, 0); update()" class="user-select-none">
         <font-awesome-icon
           :icon="['fas', 'minus']"
