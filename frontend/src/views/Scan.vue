@@ -38,8 +38,10 @@ function onDecode (result) {
     </div>
   </div>
 
-  <div class="row box bg-white border-top ">
-    <stream-barcode-reader @decode="onDecode" class="p-0 mb-n2"/>
+  <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center rounded-4 overflow-hidden">
+      <stream-barcode-reader @decode="onDecode" class="p-0 m-0"/>
+    </div>
   </div>
 
 </template>

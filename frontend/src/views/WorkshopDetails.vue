@@ -7,6 +7,7 @@ import { ref } from 'vue'
 import WorkshopItemBlock from '../component/workshopItem/WorkshopItemBlock.vue'
 import { useProductStore } from '../store/productStore.js'
 import { useWorkshopItemStore } from '../store/workshopItemStore.js'
+import NumberInput from '../component/input/NumberInput.vue'
 
 const route = useRoute()
 const workshopStore = useWorkshopStore()
@@ -49,13 +50,14 @@ async function saveItem (item) {
   </div>
 
   <div class="row box bg-white border-top">
-    <text-input name="Name" v-model:value="workshop.name" @update:value="save"/>
+    <text-input name="Naam" v-model:value="workshop.name" @update:value="save"/>
+    <number-input name="Standaard Groepsgrootte" v-model:value="workshop.defaultGroupSize" @update:value="save"/>
   </div>
 
   <!-- items -->
   <div class="row box-header">
     <div class="col-2 d-flex align-items-center">
-      <h3 class="m-2">Items</h3>
+      <h3 class="m-2">Producten</h3>
     </div>
 
     <div class="col-10 d-flex align-items-center justify-content-end">
@@ -76,7 +78,7 @@ async function saveItem (item) {
         @update:workshopItem="saveItem" />
 
     <div v-if="!items.length" class="d-flex align-items-center justify-content-center border-bottom">
-      <span class="h5 m-3">Geen items gevonden</span>
+      <span class="h6 m-4">Geen producten gevonden</span>
     </div>
   </div>
 </template>

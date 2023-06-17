@@ -4,9 +4,10 @@ export class PutWorkshopRequest extends Request {
     schema = {
         type: 'object',
         additionalProperties: false,
-        required: ['name'],
+        required: ['name', 'defaultGroupSize'],
         properties: {
-            name: { type: 'string' }
+            name: { type: 'string' },
+            defaultGroupSize: { type: 'number' }
         }
     }
 
