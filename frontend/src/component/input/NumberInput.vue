@@ -22,6 +22,10 @@ watch(() => props.value, (newValue) => {
 })
 
 function update () {
+    if (!value.value && value.value !== 0) {
+        return
+    }
+
     emit('update:value', value.value)
 }
 </script>
@@ -39,7 +43,7 @@ function update () {
           class="p-3 mx-2 rounded-3 hover-darken"/>
       </div>
 
-      <input type="number" class="form-control-plaintext" style="width: 2rem" v-model="value" @input="update"/>
+      <input type="number" class="form-control-plaintext" style="width: 2rem" v-model="value" @input="update" />
 
       <div role="button" @click="value += 1; update()" class="user-select-none">
         <font-awesome-icon
