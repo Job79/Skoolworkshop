@@ -28,10 +28,7 @@ function update () {
   <router-link :to="`/products/${product.id}`" class="d-flex align-items-center border-bottom">
     <!-- image and title -->
     <font-awesome-icon :icon="['fas', 'box']" class="fa-3x img border p-3 ms-1 me-3 my-3"/>
-    <div class="flex-column d-flex">
-      <span class="h5"> {{ props.product.name }} </span>
-      <span>Aantal: {{props.product.stock}}</span>
-    </div>
+    <span class="h5"> {{ props.product.name }} </span>
 
     <div class="ms-auto" @click.prevent>
       <!-- edit mode buttons -->
