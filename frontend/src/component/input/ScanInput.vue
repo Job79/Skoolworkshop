@@ -76,7 +76,8 @@ function printQr () {
         v-if="props.value"
         :value="props.value"
         type="image/png"
-        width="250"
+        :width="250"
+        :color="{dark: '#000000', light: '#ffffff'}"
     />
   </div>
 </template>
