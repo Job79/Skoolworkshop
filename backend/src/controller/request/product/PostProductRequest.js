@@ -7,6 +7,7 @@ export class PostProductRequest extends Request {
         required: ['name', 'stock', 'reusable'],
         properties: {
             name: { type: 'string' },
+            shopUrl: { type: ['string', 'null'] },
             stock: { type: 'number' },
             bufferStock: { type: ['number', 'null'] },
             code: { type: ['string', 'null'] },

@@ -7,12 +7,14 @@ import NumberInput from '../component/input/NumberInput.vue'
 import CheckboxInput from '../component/input/CheckboxInput.vue'
 import { ref } from 'vue'
 import ScanInput from '../component/input/ScanInput.vue'
+import UrlInput from '../component/input/UrlInput.vue'
 
 const router = useRouter()
 const productStore = useProductStore()
 
 const product = ref({
     name: '',
+    shopUrl: null,
     stock: 0,
     bufferStock: 0,
     reusable: false
@@ -40,6 +42,8 @@ async function create () {
 
   <div class="row box bg-white border-top">
     <text-input name="Naam" v-model:value="product.name" />
+    <url-input name="Winkel Url" v-model:value="product.shopUrl" :start-open="true" />
+
     <number-input name="Voorraad" v-model:value="product.stock" />
     <number-input name="Buffer Voorraad" v-model:value="product.bufferStock" />
     <checkbox-input name="Herbruikbaar" v-model:value="product.reusable" />

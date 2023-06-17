@@ -7,6 +7,7 @@ import CheckboxInput from '../component/input/CheckboxInput.vue'
 import ScanInput from '../component/input/ScanInput.vue'
 import { ref } from 'vue'
 import NumberInput from '../component/input/NumberInput.vue'
+import UrlInput from '../component/input/UrlInput.vue'
 
 const route = useRoute()
 const productStore = useProductStore()
@@ -35,6 +36,7 @@ async function save () {
 
   <div class="row box bg-white border-top">
     <text-input name="Naam" v-model:value="product.name" @update:value="save"/>
+    <url-input name="Winkel Url" v-model:value="product.shopUrl" @update:value="save"/>
     <number-input name="Voorraad" v-model:value="product.stock" @update:value="save">
       <router-link class="d-flex align-items-center user-select-none" role="button" :to='`/products/${productId}/edit-stock`'>
         <font-awesome-icon
