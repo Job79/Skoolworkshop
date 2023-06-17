@@ -55,7 +55,7 @@ async function saveItem (item) {
   <!-- items -->
   <div class="row box-header">
     <div class="col-2 d-flex align-items-center">
-      <h3 class="m-2">Items</h3>
+      <h3 class="m-2">Producten</h3>
     </div>
 
     <div class="col-10 d-flex align-items-center justify-content-end">
@@ -76,7 +76,7 @@ async function saveItem (item) {
         @update:workshopItem="saveItem" />
 
     <div v-if="!items.length" class="d-flex align-items-center justify-content-center border-bottom">
-      <span class="h5 m-3">Geen items gevonden</span>
+      <span class="h6 m-4">Geen producten gevonden</span>
     </div>
   </div>
 </template>
