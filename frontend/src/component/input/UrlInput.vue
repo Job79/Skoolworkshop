@@ -74,7 +74,13 @@ function focusOut () {
       <input v-else type="text" class="form-control" v-model="value" @keydown.enter="update" @blur="focusOut" autofocus/>
       <div role="button" @click="update" class="user-select-none">
         <font-awesome-icon
+            v-if="value"
             :icon="['fas', 'pen']"
+            class="p-3 mx-2 rounded-3 hover-darken"
+            :class="{'bg-secondary': edit}"/>
+        <font-awesome-icon
+            v-else
+            :icon="['fas', 'plus']"
             class="p-3 mx-2 rounded-3 hover-darken"
             :class="{'bg-secondary': edit}"/>
       </div>
