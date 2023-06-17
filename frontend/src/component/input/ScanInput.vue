@@ -66,7 +66,7 @@ function printQr () {
   </div>
 
   <div v-if="showScanner" class="p-0">
-        <div class=" w-100">
+        <div class="d-flex justify-content-center">
           <stream-barcode-reader @decode="onDecode"/>
         </div>
   </div>
