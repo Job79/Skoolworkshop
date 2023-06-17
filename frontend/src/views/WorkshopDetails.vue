@@ -7,6 +7,7 @@ import { ref } from 'vue'
 import WorkshopItemBlock from '../component/workshopItem/WorkshopItemBlock.vue'
 import { useProductStore } from '../store/productStore.js'
 import { useWorkshopItemStore } from '../store/workshopItemStore.js'
+import NumberInput from "../component/input/NumberInput.vue";
 
 const route = useRoute()
 const workshopStore = useWorkshopStore()
@@ -50,6 +51,7 @@ async function saveItem (item) {
 
   <div class="row box bg-white border-top">
     <text-input name="Naam" v-model:value="workshop.name" @update:value="save"/>
+    <number-input name="Standaard Groepsgrootte" v-model:value="workshop.defaultGroupSize" @update:value="save"/>
   </div>
 
   <!-- items -->
