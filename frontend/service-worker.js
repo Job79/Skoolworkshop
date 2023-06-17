@@ -1,8 +1,8 @@
 self.addEventListener('push', function (event) {
-    let data = {};
+    let data = {}
 
     if (event.data) {
-        data = event.data.json();
+        data = event.data.json()
     }
 
     const options = {
@@ -15,4 +15,3 @@ self.addEventListener('push', function (event) {
         self.registration.showNotification(data.title || 'Push Notification Title', options)
     )
 })
-

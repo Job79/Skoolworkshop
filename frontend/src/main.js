@@ -85,7 +85,7 @@ function subscribeUserToPush () {
 function sendSubscriptionToBackEnd (subscription) {
     return fetch('/api/save-subscription/', {
         method: 'POST',
-        headers: {  
+        headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(subscription)
@@ -102,5 +102,4 @@ function sendSubscriptionToBackEnd (subscription) {
                 throw new Error('Bad response from server.')
             }
         })
-
 }

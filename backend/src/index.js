@@ -4,7 +4,7 @@ import 'express-async-errors'
 import cookieParser from 'cookie-parser'
 import { WorkshopController } from './controller/WorkshopController.js'
 import { ProductController } from './controller/ProductController.js'
-import { SubscriptionController } from './controller/SubscriptionController.js';
+import { SubscriptionController } from './controller/SubscriptionController.js'
 import { PrismaClient } from '@prisma/client'
 import { colorConsole } from 'tracer'
 import { LoggerMiddleware } from './middleware/LoggerMiddleware.js'
@@ -15,7 +15,7 @@ import { AuthController } from './controller/AuthController.js'
 import { AuthService } from './service/AuthService.js'
 import { AuthMiddleware } from './middleware/AuthMiddleware.js'
 import { WorkshopItemController } from './controller/WorkshopItemController.js'
-import { CalendarController } from "./controller/CalendarController.js";
+import { CalendarController } from './controller/CalendarController.js'
 dotenv.config()
 
 const db = new PrismaClient()
@@ -52,8 +52,7 @@ app
     .post('/api/auth/token', (req, res) => controller.auth.token(req, res))
     .post('/api/auth/logout', (req, res) => controller.auth.logout(req, res))
 
-app.post('/api/save-subscription/', (req, res) => controller.subscription.save(req, res));
-
+app.post('/api/save-subscription/', (req, res) => controller.subscription.save(req, res))
 
 app
     .get('/api/workshops', middleware.auth.validate(), (req, res) => controller.workshop.all(req, res))
@@ -88,7 +87,6 @@ app
 app
     .get('/api/calendar', middleware.auth.validate(), (req, res) => controller.calendar.all(req, res))
     .get('/api/calendar/:id', middleware.auth.validate(), (req, res) => controller.calendar.get(req, res))
-
 
 // Register error handlers.
 app

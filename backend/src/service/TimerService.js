@@ -27,4 +27,3 @@ export class TimerService {
         return productsToOrder
     }
 }
-
