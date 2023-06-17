@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { StreamBarcodeReader } from 'vue-barcode-reader'
 import { ref } from 'vue'
 import { useProductStore } from '../../store/productStore.js'
-import VueQrcode from "vue-qrcode";
+import VueQrcode from 'vue-qrcode'
 
 const emit = defineEmits(['update:value'])
 const props = defineProps({
@@ -31,13 +31,13 @@ function generateCode () {
 }
 
 function printQr () {
-  const prtContent = document.getElementById('qrCode')
-  const winPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0')
-  winPrint.document.write(prtContent.innerHTML)
-  winPrint.document.close()
-  winPrint.focus()
-  winPrint.print()
-  winPrint.close()
+    const prtContent = document.getElementById('qrCode')
+    const winPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0')
+    winPrint.document.write(prtContent.innerHTML)
+    winPrint.document.close()
+    winPrint.focus()
+    winPrint.print()
+    winPrint.close()
 }
 </script>
 

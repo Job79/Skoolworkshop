@@ -4,7 +4,7 @@ import { useWorkshopStore } from '../store/workshopStore.js'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import TextInput from '../component/input/TextInput.vue'
 import { ref } from 'vue'
-import NumberInput from "../component/input/NumberInput.vue";
+import NumberInput from '../component/input/NumberInput.vue'
 
 const router = useRouter()
 const workshopStore = useWorkshopStore()

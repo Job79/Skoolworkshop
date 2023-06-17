@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import TextInput from '../component/input/TextInput.vue'
 import CheckboxInput from '../component/input/CheckboxInput.vue'
 import ScanInput from '../component/input/ScanInput.vue'
-import VueQrcode from 'vue-qrcode'
 import { ref } from 'vue'
 import NumberInput from '../component/input/NumberInput.vue'
 

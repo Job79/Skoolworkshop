@@ -7,7 +7,7 @@ import { ref } from 'vue'
 import WorkshopItemBlock from '../component/workshopItem/WorkshopItemBlock.vue'
 import { useProductStore } from '../store/productStore.js'
 import { useWorkshopItemStore } from '../store/workshopItemStore.js'
-import NumberInput from "../component/input/NumberInput.vue";
+import NumberInput from '../component/input/NumberInput.vue'
 
 const route = useRoute()
 const workshopStore = useWorkshopStore()
