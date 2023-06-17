@@ -39,6 +39,12 @@ function update () {
         edit.value = false
     }
 }
+
+function focusOut () {
+  setTimeout(() => {
+    if (edit.value) update()
+  }, 100)
+}
 </script>
 
 <template>
@@ -47,7 +53,7 @@ function update () {
 
     <div class="ms-auto d-flex align-items-center">
       <span v-if="!edit" class="h4">•••••••</span>
-      <input v-else type="text" class="form-control" v-model="value" @keydown.enter="update" @focusout="update" autofocus/>
+      <input v-else type="text" class="form-control" v-model="value" @keydown.enter="update" @blur="focusOut" autofocus/>
       <div role="button" @click="update" class="user-select-none">
         <font-awesome-icon
             :icon="['fas', 'pen']"
