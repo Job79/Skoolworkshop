@@ -49,11 +49,6 @@ setInterval(async () => {
             }
         })
 
-        const message = JSON.stringify({
-            title: 'Products to Order',
-            body: productsToOrderMessage
-        })
-
         // Update the lastSent time to now
         lastSent = now
     }
