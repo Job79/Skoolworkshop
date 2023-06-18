@@ -2,7 +2,6 @@ import { PrismaClient } from '@prisma/client'
 import { CalendarService } from './calendarService'
 import { TimerService } from './timerService'
 import nodemailer from 'nodemailer'
-import webpush from 'web-push'
 
 const db = new PrismaClient()
 const calendarService = new CalendarService(db)
@@ -15,25 +14,6 @@ const transporter = nodemailer.createTransport({
         pass: 'Avans55!'
     }
 })
-
-const vapidKeys = {
-    publicKey:
-        'BPAm8av-4R6wngbi4_9ahOI8bEtKCFq6iBY-dc5l5G23Z4DNd5GxMiOUvBt3BUf-lWsD2z2SWW4QdMOM32jrdqc',
-    privateKey: '0lkU4LU67rE3njkicMeXF81_OJDNS-gaAAl8QO6zAEI'
-}
-webpush.setVapidDetails(
-    'mailto:your-email@example.com',
-    vapidKeys.publicKey,
-    vapidKeys.privateKey
-)
-
-const pushSubscription = {
-    endpoint: '.....',
-    keys: {
-        auth: '.....',
-        p256dh: '.....'
-    }
-}
 
 let lastSent = null
 
@@ -73,8 +53,6 @@ setInterval(async () => {
             title: 'Products to Order',
             body: productsToOrderMessage
         })
-
-        webpush.sendNotification(pushSubscription, message)
 
         // Update the lastSent time to now
         lastSent = now

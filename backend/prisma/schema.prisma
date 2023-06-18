@@ -68,8 +68,3 @@ model Calendar {
   workshop Workshop @relation(fields: [workshopId], references: [id])
 }
 
-model Subscription {
-  id       Int     @id @default(autoincrement())
-  endpoint String
-  keys     Json
-}
