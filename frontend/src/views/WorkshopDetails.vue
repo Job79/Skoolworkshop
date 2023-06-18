@@ -44,14 +44,16 @@ async function saveProduct (product) {
 
 function removeAllProducts () {
     for (let i = 0; i < products.length; i++) {
+      if (!products[i].reusable) {
         products[i].stock -= Math.round(amountOfPeople.value / (items[i].people / items[i].quantity))
         console.log(Math.round(amountOfPeople.value / (items[i].people / items[i].quantity)))
         if (products[i].stock < 0) {
-            products[i].stock = 0
-            showPopup.value = false
-            throw Error(products[i].name + ' heeft niet genoeg voorraad')
+          products[i].stock = 0
+          showPopup.value = false
+          throw Error(products[i].name + ' heeft niet genoeg voorraad')
         }
         saveProduct(products[i])
+      }
     }
     showPopup.value = false
 }
@@ -83,12 +85,12 @@ function removeAllProducts () {
 
     <div class="col-10 d-flex align-items-center justify-content-end">
       <!-- action buttons -->
+      <div type="button" class="btn p-3 hover-darken" @click="showPopup = !showPopup">
+        <font-awesome-icon :icon="['fas', 'boxes-packing']" class="fa-xl"/>
+      </div>
       <router-link class="btn p-3 hover-darken" :to="`/products/new?workshopId=${workshop.id}`">
         <font-awesome-icon :icon="['fas', 'plus']" class="fa-xl"/>
       </router-link>
-      <div type="button" class="btn p-3 hover-darken me-2" @click="showPopup = !showPopup">
-        <font-awesome-icon :icon="['fas', 'minus']" class="fa-xl"/>
-      </div>
       <router-link class="btn p-3 hover-darken" :to="`/workshops/${workshop.id}/items`">
         <font-awesome-icon :icon="['fas', 'pen-to-square']" class="fa-xl"/>
       </router-link>

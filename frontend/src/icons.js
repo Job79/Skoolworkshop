@@ -30,7 +30,8 @@ import {
     faArrowsRotate,
     faShuffle,
     faExternalLinkAlt,
-    faRepeat
+    faRepeat,
+    faBoxesPacking
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -64,5 +65,6 @@ library.add(
     faArrowsRotate,
     faShuffle,
     faExternalLinkAlt,
-    faRepeat
+    faRepeat,
+    faBoxesPacking
 )
