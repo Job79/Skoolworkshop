@@ -1,6 +1,7 @@
 <script setup>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { ref, watch } from 'vue'
+import NumberInput from '../input/NumberInput.vue'
 
 const emit = defineEmits(['update:workshopItem'])
 const props = defineProps({
@@ -29,51 +30,16 @@ function update () {
 </script>
 
 <template>
-  <router-link :to="`/products/${product.id}`" class="d-flex align-items-center border-bottom">
-    <!-- image and title -->
-    <font-awesome-icon :icon="['fas', 'box']" class="fa-3x img border p-3 ms-1 me-3 my-3"/>
-    <span class="h5"> {{ props.product.name }} </span>
-
-    <div class="ms-auto" @click.prevent>
-      <!-- edit mode buttons -->
-
-      <div class="ms-auto d-flex align-items-center">
-        <!-- people -->
-        <font-awesome-icon :icon="['fas', 'people-group']" class="fa-1x"/>
-
-        <button @click="workshopItem.people = Math.max(workshopItem.people - 1, 0); update()" class="btn btn-sm border-0" title="Gebruikers - 1">
-          <font-awesome-icon
-              :icon="['fas', 'minus']"
-              class="p-3 rounded-3 hover-darken" />
-        </button>
-
-        <input type="number" class="form-control-plaintext text-center" style="width: 20px" v-model="workshopItem.people" @input="update" />
-
-        <button @click="workshopItem.people += 1; update()" class="btn btn-sm border-0" title="Gebruikers + 1">
-          <font-awesome-icon
-              :icon="['fas', 'plus']"
-              class="p-3 rounded-3 hover-darken" />
-        </button>
+    <router-link :to="`/products/${product.id}`" class="d-flex flex-column border-bottom">
+      <!-- image and title -->
+      <div class="d-flex align-items-center">
+        <font-awesome-icon :icon="['fas', 'box']" class="fa-3x img border p-3 ms-1 me-3 my-3" />
+        <span class="h5"> {{ props.product.name }} </span>
       </div>
 
-      <div class="ms-auto d-flex align-items-center">
-        <!-- quantity -->
-        <font-awesome-icon :icon="['fas', 'warehouse']" class="fa-1x" />
-
-        <button @click="workshopItem.quantity = Math.max(workshopItem.quantity - 1, 0); update()" class="btn btn-sm border-0">
-          <font-awesome-icon
-              :icon="['fas', 'minus']"
-              class="p-3 rounded-3 hover-darken" />
-        </button>
-
-        <input type="number" class="form-control-plaintext text-center" style="width: 20px" v-model="workshopItem.quantity" @input="update" />
-
-        <button @click="workshopItem.quantity += 1; update()" class="btn btn-sm border-0">
-          <font-awesome-icon
-              :icon="['fas', 'plus']"
-              class="p-3 rounded-3 hover-darken" />
-        </button>
+      <div class="bg-white border-top p-0" @click.prevent>
+        <number-input name="Voor dit aantal personen" v-model:value="workshopItem.people" @update:value="update" />
+        <number-input name="Zijn zoveel producten nodig" v-model:value="workshopItem.quantity" @update:value="update" />
       </div>
-    </div>
-  </router-link>
+    </router-link>
 </template>

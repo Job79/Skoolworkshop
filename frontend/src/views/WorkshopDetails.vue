@@ -63,7 +63,7 @@ function removeAllProducts () {
   <div class="row box-header">
     <div class="d-flex align-items-center m-0" style="width: min-content">
       <a class="btn p-2 bg-secondary hover-darken" @click="$router.back()">
-        <font-awesome-icon :icon="['fas', 'caret-left']" class="fa-xl" style="width: 24px"/>
+        <font-awesome-icon :icon="['fas', 'caret-left']" class="fa-xl" style="width: 24px" />
       </a>
     </div>
 
@@ -73,8 +73,8 @@ function removeAllProducts () {
   </div>
 
   <div class="row box bg-white border-top">
-    <text-input name="Naam" v-model:value="workshop.name" @update:value="save"/>
-    <number-input name="Standaard Groepsgrootte" v-model:value="workshop.defaultGroupSize" @update:value="save"/>
+    <text-input name="Naam" v-model:value="workshop.name" @update:value="save" />
+    <number-input name="Standaard Groepsgrootte" v-model:value="workshop.defaultGroupSize" @update:value="save" />
   </div>
 
   <!-- products -->
@@ -105,17 +105,15 @@ function removeAllProducts () {
     <div type="button" class="btn btn-primary ms-4" @click="removeAllProducts" style="color: white">Accepteren</div>
   </div>
 
-  <div class="row box bg-white border-top">
-    <!-- workshop items list -->
-    <workshop-item-block
-        v-for="item in items"
-        :key="item.id"
-        :product="products.find(p => p.id === item.productId)"
-        :workshop-item="item"
-        @update:workshopItem="saveItem" />
+  <!-- workshop items list -->
+  <workshop-item-block v-for="item in items"
+                       class="row box bg-white border-top"
+                       :key="item.id"
+                       :product="products.find(p => p.id === item.productId)"
+                       :workshop-item="item"
+                       @update:workshopItem="saveItem" />
 
-    <div v-if="!items.length" class="d-flex align-items-center justify-content-center border-bottom">
-      <span class="h6 m-4">Geen producten gevonden</span>
-    </div>
+  <div v-if="!items.length" class="box bg-white d-flex align-items-center justify-content-center border-bottom">
+    <span class="h6 m-4">Geen producten gevonden</span>
   </div>
 </template>
