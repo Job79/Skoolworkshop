@@ -96,7 +96,7 @@ export class CalendarService {
             // Loop over all sorted calendar items after current,
             // if startDate of calendarItem is after endDate of current,
             // then calendarItem is not overlapping with current.
-            if (calendarItem.startDate > current.endDate) {
+            if (calendarItem.startDate >= current.endDate) {
                 break
             }
 
