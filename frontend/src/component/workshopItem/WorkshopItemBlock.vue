@@ -20,6 +20,10 @@ watch(() => props.workshopItem, (newValue) => {
 })
 
 function update () {
+    if (!workshopItem.value.people || !workshopItem.value.quantity) {
+      return
+    }
+
     emit('update:workshopItem', workshopItem.value)
 }
 </script>
