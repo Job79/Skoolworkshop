@@ -4,18 +4,20 @@ import { useWorkshopStore } from '../store/workshopStore.js'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import TextInput from '../component/input/TextInput.vue'
 import { ref } from 'vue'
+import NumberInput from '../component/input/NumberInput.vue'
 
 const router = useRouter()
 const workshopStore = useWorkshopStore()
 
 const workshop = ref({
-    name: ''
+    name: '',
+    defaultGroupSize: 25
 })
 
 async function create () {
     if (workshop.value.name === '') throw new Error('name is empty')
     await workshopStore.create(workshop.value)
-    await router.back()
+    router.back()
 }
 </script>
 
@@ -33,11 +35,12 @@ async function create () {
   </div>
 
   <div class="row box bg-white border-top">
-    <text-input name="Name" v-model:value="workshop.name" />
+    <text-input name="Naam" v-model:value="workshop.name" />
+    <number-input name="Standaard Groepsgrootte" v-model:value="workshop.defaultGroupSize"/>
 
     <button class="m-3 ms-auto btn p-2 bg-primary d-flex justify-content-center" @click="create" style="width: 10rem">
       <font-awesome-icon :icon="['fas', 'floppy-disk']" class="fa-xl" />
-      <span class="h5 m-0 ms-3">aanmaken</span>
+      <span class="h5 m-0 ms-3">Aanmaken</span>
     </button>
   </div>
 </template>

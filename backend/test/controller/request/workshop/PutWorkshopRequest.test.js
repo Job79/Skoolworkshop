@@ -6,7 +6,8 @@ describe('controller/request/workshop/PutWorkshopRequest', () => {
     it('should accept valid requests', async () => {
         const req = {
             body: {
-                name: 'workshop 1'
+                name: 'workshop 1',
+                defaultGroupSize: 3
             }
         }
         const data = new PutWorkshopRequest(req).data()

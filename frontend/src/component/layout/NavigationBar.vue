@@ -17,38 +17,43 @@ async function logout () {
   <div class="navigation-bar">
     <img src="../../assets/logo.png" alt="logo" class="d-none d-sm-block px-3 py-3 border-bottom" style="height: 4rem" />
 
-    <router-link to="/workshops"
+    <router-link to="/products"
                  class="d-flex justify-content-center align-items-center w-100"
-                 :class="{'text-primary': route.meta.nav === 'workshop'}">
-      <font-awesome-icon :icon="['fas', 'people-group']" class="fa-2x p-3"/>
+                 :class="{'text-primary': route.meta.nav === 'product'}"
+                 title="Producten">
+      <font-awesome-icon :icon="['fas', 'boxes-stacked']" class="fa-2x p-3"/>
     </router-link>
 
-    <router-link to="/scan"
+    <router-link to="/scan/edit-stock"
                  class="d-flex d-sm-none justify-content-center align-items-center bg-primary rounded-circle"
-                 style="height: 4rem; width: 4rem; margin-top: -1rem">
+                 style="height: 3.75rem; margin-top: -1rem"
+                 title="Scan QR/Bar code">
       <font-awesome-icon :icon="['fas', 'qrcode']" class="fa-2x p-3"/>
     </router-link>
 
-    <router-link to="/products"
+    <router-link to="/workshops"
                  class="d-flex justify-content-center align-items-center w-100"
-                 :class="{'text-primary': route.meta.nav === 'product'}">
-      <font-awesome-icon :icon="['fas', 'boxes-stacked']" class="fa-2x p-3"/>
+                 :class="{'text-primary': route.meta.nav === 'workshop'}"
+                 title="Workshops">
+      <font-awesome-icon :icon="['fas', 'people-group']" class="fa-2x p-3"/>
     </router-link>
 
     <router-link to="/calendar"
                  class="d-none d-sm-flex justify-content-center align-items-center w-100"
-                 :class="{'text-primary': route.meta.nav === 'calendar'}">
+                 :class="{'text-primary': route.meta.nav === 'calendar'}"
+                 title="Kalender">
       <font-awesome-icon :icon="['fas', 'calendar-day']" class="fa-2x p-3"/>
     </router-link>
 
     <router-link to="/users"
                  v-if="authStore.data.role === 'admin'"
                  class="d-none d-sm-flex justify-content-center align-items-center w-100"
-                 :class="{'text-primary': route.meta.nav === 'user'}">
+                 :class="{'text-primary': route.meta.nav === 'user'}"
+                 title="Gebruikers">
       <font-awesome-icon :icon="['fas', 'user-gear']" class="fa-2x p-3"/>
     </router-link>
 
-    <button class="btn mt-auto d-none d-sm-flex justify-content-center align-items-center w-100" @click="logout">
+    <button class="btn mt-auto d-none d-sm-flex justify-content-center align-items-center w-100" @click="logout" title="Uitloggen">
       <font-awesome-icon :icon="['fas', 'right-from-bracket']" class="fa-xl p-3"/>
     </button>
   </div>

@@ -37,8 +37,8 @@ async function save () {
   </div>
 
   <div class="row box bg-white border-top">
-    <text-input name="Name" v-model:value="user.name" @update:value="save" />
-    <password-input name="Password" v-model:value="user.password" @update:value="save" />
-    <options-input name="Role" v-model:value="user.role" :options="roles" @update:value="save" />
+    <text-input name="Naam" v-model:value="user.name" @update:value="save" />
+    <password-input name="Wachtwoord" v-model:value="user.password" @update:value="save" />
+    <options-input name="Rol" v-model:value="user.role" :options="roles" @update:value="save" />
   </div>
 </template>

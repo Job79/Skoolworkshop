@@ -27,8 +27,9 @@ model Session {
 }
 
 model Workshop {
-  id   Int    @id @default(autoincrement())
-  name String @unique
+  id               Int    @id @default(autoincrement())
+  name             String @unique
+  defaultGroupSize Int    @default(25)
 
   items    WorkshopItem[]
   calendar Calendar[]
@@ -37,6 +38,7 @@ model Workshop {
 model Product {
   id          Int     @id @default(autoincrement())
   name        String  @unique
+  shopUrl     String?
   stock       Int
   bufferStock Int     @default(0)
   code        String? @unique

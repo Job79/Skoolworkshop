@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { StreamBarcodeReader } from 'vue-barcode-reader'
 import { ref } from 'vue'
 import { useProductStore } from '../../store/productStore.js'
+import VueQrcode from 'vue-qrcode'
 
 const emit = defineEmits(['update:value'])
 const props = defineProps({
@@ -28,33 +29,55 @@ function generateCode () {
         emit('update:value', code.toString())
     }
 }
+
+function printQr () {
+    const prtContent = document.getElementById('qrCode')
+    const winPrint = window.open('', '', 'left=0,top=0,width=800,height=900,toolbar=0,scrollbars=0,status=0')
+    winPrint.document.write(prtContent.innerHTML)
+    winPrint.document.close()
+    winPrint.focus()
+    winPrint.print()
+    winPrint.close()
+}
 </script>
 
 <template>
-  <div type="button" class="d-flex align-items-center p-2 border-bottom">
-    <span class="mx-3">Code: {{ props.value }}</span>
-    <div class="justify-content-center">
-      <div v-if="showScanner" class="d-flex justify-content-center align-items-center">
-        <div class="position-absolute d-flex flex-column">
-          <stream-barcode-reader @decode="onDecode" class="ps-3 pe-3"/>
-        </div>
-      </div>
-    </div>
+  <div type="button" class="d-flex align-items-center px-2 py-1 border-bottom">
+    <span class="mx-3">QR/Bar Code</span>
 
     <div class="ms-auto d-flex align-items-center">
-      <div class="d-flex align-items-center user-select-none" role="button" @click="showScanner = !showScanner">
-        Scan
+      <button class="btn btn-sm border-0 d-flex align-items-center" @click="showScanner = !showScanner" title="Scan QR/Bar code">
         <font-awesome-icon
           :icon="['fas', 'qrcode']"
-          class="p-3 mx-2 rounded-3 hover-darken"/>
-      </div>
+          class="p-3 mx-1 rounded-3 hover-darken"/>
+      </button>
 
-      <div class="ps-3 d-flex align-items-center user-select-none" role="button" @click="generateCode">
-        Generate
+      <button v-if="!value" class="btn btn-sm border-0 d-flex align-items-center" @click="generateCode" title="Genereer random code">
         <font-awesome-icon
-          :icon="['fas', 'plus']"
-          class="p-3 mx-2 rounded-3 hover-darken"/>
-      </div>
+          :icon="['fas', 'shuffle']"
+          class="fa-1x p-3 rounded-3 hover-darken"/>
+      </button>
+      <button v-else class="btn btn-sm border-0 d-flex align-items-center" @click="printQr" title="Print QR code">
+        <font-awesome-icon
+            :icon="['fas', 'print']"
+            class="fa-1x p-3 rounded-3 hover-darken"/>
+      </button>
     </div>
+  </div>
+
+  <div v-if="showScanner" class="p-0">
+        <div class="d-flex justify-content-center">
+          <stream-barcode-reader @decode="onDecode"/>
+        </div>
+  </div>
+
+  <div id="qrCode" class="d-none">
+    <vue-qrcode
+        v-if="props.value"
+        :value="props.value"
+        type="image/png"
+        :width="250"
+        :color="{dark: '#000000', light: '#ffffff'}"
+    />
   </div>
 </template>

@@ -20,13 +20,16 @@ watch(() => props.workshopItem, (newValue) => {
 })
 
 function update () {
+    if (!workshopItem.value.people || !workshopItem.value.quantity) {
+        return
+    }
+
     emit('update:workshopItem', workshopItem.value)
 }
 </script>
 
 <template>
-  <router-link :to="`/products/${product.id}`"
-               class="d-flex align-items-center border-bottom">
+  <router-link :to="`/products/${product.id}`" class="d-flex align-items-center border-bottom">
     <!-- image and title -->
     <font-awesome-icon :icon="['fas', 'box']" class="fa-3x img border p-3 ms-1 me-3 my-3"/>
     <span class="h5"> {{ props.product.name }} </span>
@@ -38,38 +41,38 @@ function update () {
         <!-- people -->
         <font-awesome-icon :icon="['fas', 'people-group']" class="fa-1x"/>
 
-        <div role="button" @click="workshopItem.people = Math.max(workshopItem.people - 1, 0); update()" class="user-select-none">
+        <button @click="workshopItem.people = Math.max(workshopItem.people - 1, 0); update()" class="btn btn-sm border-0" title="Gebruikers - 1">
           <font-awesome-icon
               :icon="['fas', 'minus']"
-              class="p-3 mx-1 rounded-3 hover-darken" />
-        </div>
+              class="p-3 rounded-3 hover-darken" />
+        </button>
 
-        <input type="number" class="form-control-plaintext" style="width: 20px" v-model="workshopItem.people" @input="update" />
+        <input type="number" class="form-control-plaintext text-center" style="width: 20px" v-model="workshopItem.people" @input="update" />
 
-        <div role="button" @click="workshopItem.people += 1; update()" class="user-select-none">
+        <button @click="workshopItem.people += 1; update()" class="btn btn-sm border-0" title="Gebruikers + 1">
           <font-awesome-icon
               :icon="['fas', 'plus']"
-              class="p-3 mx-1 rounded-3 hover-darken" />
-        </div>
+              class="p-3 rounded-3 hover-darken" />
+        </button>
       </div>
 
       <div class="ms-auto d-flex align-items-center">
         <!-- quantity -->
         <font-awesome-icon :icon="['fas', 'warehouse']" class="fa-1x" />
 
-        <div role="button" @click="workshopItem.quantity = Math.max(workshopItem.quantity - 1, 0); update()" class="user-select-none">
+        <button @click="workshopItem.quantity = Math.max(workshopItem.quantity - 1, 0); update()" class="btn btn-sm border-0">
           <font-awesome-icon
               :icon="['fas', 'minus']"
-              class="p-3 mx-1 rounded-3 hover-darken" />
-        </div>
+              class="p-3 rounded-3 hover-darken" />
+        </button>
 
-        <input type="number" class="form-control-plaintext" style="width: 20px" v-model="workshopItem.quantity" @input="update" />
+        <input type="number" class="form-control-plaintext text-center" style="width: 20px" v-model="workshopItem.quantity" @input="update" />
 
-        <div role="button" @click="workshopItem.quantity += 1; update()" class="user-select-none">
+        <button @click="workshopItem.quantity += 1; update()" class="btn btn-sm border-0">
           <font-awesome-icon
               :icon="['fas', 'plus']"
-              class="p-3 mx-1 rounded-3 hover-darken" />
-        </div>
+              class="p-3 rounded-3 hover-darken" />
+        </button>
       </div>
     </div>
   </router-link>

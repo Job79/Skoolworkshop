@@ -18,14 +18,14 @@ const workshops = workshopStore.workshops
 <template>
   <div class="row box-header">
     <div class="col-2 d-flex align-items-center">
-      <h3 class="m-2">Calendar</h3>
+      <h3 class="m-2">Kalender</h3>
     </div>
 
     <div class="col-10 d-flex align-items-center justify-content-end">
       <!-- action buttons -->
-      <div class="btn p-3 hover-darken">
+      <button class="btn p-3 hover-darken" @click="calendarStore.refresh()" title="Verversen">
         <font-awesome-icon :icon="['fas', 'arrows-rotate']" class="fa-xl" />
-      </div>
+      </button>
     </div>
   </div>
 
@@ -37,5 +37,9 @@ const workshops = workshopStore.workshops
         :key="item.id"
         :item="item"
         :workshop="workshops.find(w => w.id === item.workshopId)" />
+
+    <div v-if="!calendarStore.calendarItems.length" class="d-flex align-items-center justify-content-center border-bottom">
+      <span class="h6 m-4">Kalender is leeg</span>
+    </div>
   </div>
 </template>

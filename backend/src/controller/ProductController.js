@@ -73,4 +73,34 @@ export class ProductController {
             throw new HttpError(500, 'could not delete product')
         }
     }
+
+    async items (req, res) {
+        const id = req.params.id
+        const items = await this.db.workshopItem.findMany({
+            where: { productId: parseInt(id) }
+        })
+
+        res.status(200).send(items)
+    }
+
+    async calendar (req, res) {
+        const id = req.params.id
+
+        const calendar = await this.db.calendar.findMany({
+            where: {
+                workshop: {
+                    items: {
+                        some: {
+                            productId: parseInt(id)
+                        }
+                    }
+                }
+            },
+            orderBy: {
+                startDate: 'asc'
+            }
+        })
+
+        res.status(200).send(calendar)
+    }
 }

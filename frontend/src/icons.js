@@ -25,8 +25,13 @@ import {
     faCirclePlus,
     faWarehouse,
     faPrint,
+    faLayerGroup,
     faCalendarDay,
-    faArrowsRotate
+    faArrowsRotate,
+    faShuffle,
+    faExternalLinkAlt,
+    faRepeat,
+    faBoxesPacking
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -55,6 +60,11 @@ library.add(
     faCirclePlus,
     faWarehouse,
     faPrint,
+    faLayerGroup,
     faCalendarDay,
-    faArrowsRotate
+    faArrowsRotate,
+    faShuffle,
+    faExternalLinkAlt,
+    faRepeat,
+    faBoxesPacking
 )

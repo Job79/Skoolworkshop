@@ -15,13 +15,16 @@ import { AuthService } from './service/AuthService.js'
 import { AuthMiddleware } from './middleware/AuthMiddleware.js'
 import { WorkshopItemController } from './controller/WorkshopItemController.js'
 import { CalendarController } from './controller/CalendarController.js'
-
+import { CalendarService } from './service/CalendarService.js'
+import { BlazorSkoolService } from './service/BlazorSkoolService.js'
 dotenv.config()
 
 const db = new PrismaClient()
 const logger = colorConsole()
 const service = {
-    auth: new AuthService(db)
+    auth: new AuthService(db),
+    calendar: new CalendarService(db),
+    blazorSkool: new BlazorSkoolService(db, logger, process.env.BLAZORSKOOL_URL)
 }
 const middleware = {
     auth: new AuthMiddleware(),
@@ -35,7 +38,7 @@ const controller = {
     product: new ProductController(db),
     workshopItem: new WorkshopItemController(db),
     user: new UserController(db),
-    calendar: new CalendarController(db),
+    calendar: new CalendarController(db, service.calendar, service.blazorSkool)
 }
 
 // Create express app and register middleware.
@@ -63,6 +66,8 @@ app
 app
     .get('/api/products', middleware.auth.validate(), (req, res) => controller.product.all(req, res))
     .get('/api/products/:id', middleware.auth.validate(), (req, res) => controller.product.get(req, res))
+    .get('/api/products/:id/items', middleware.auth.validate(), (req, res) => controller.product.items(req, res))
+    .get('/api/products/:id/calendar', middleware.auth.validate(), (req, res) => controller.product.calendar(req, res))
     .post('/api/products', middleware.auth.validate(), (req, res) => controller.product.post(req, res))
     .put('/api/products/:id', middleware.auth.validate(), (req, res) => controller.product.put(req, res))
     .delete('/api/products/:id', middleware.auth.validate(['admin', 'user']), (req, res) => controller.product.delete(req, res))
@@ -83,7 +88,9 @@ app
 
 app
     .get('/api/calendar', middleware.auth.validate(), (req, res) => controller.calendar.all(req, res))
+    .get('/api/calendar/requiredStock', middleware.auth.validate(), (req, res) => controller.calendar.requiredStock(req, res))
     .get('/api/calendar/:id', middleware.auth.validate(), (req, res) => controller.calendar.get(req, res))
+    .post('/api/calendar/refresh', middleware.auth.validate(), (req, res) => controller.calendar.refresh(req, res))
 
 // Register error handlers.
 app

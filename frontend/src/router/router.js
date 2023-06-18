@@ -9,8 +9,7 @@ const routes = [
         component: () => import('../views/Login.vue')
     },
     {
-        path: '/',
-        alias: '/workshops',
+        path: '/workshops',
         name: 'workshops',
         meta: { nav: 'workshop' },
         component: () => import('../views/Workshops.vue')
@@ -36,6 +35,7 @@ const routes = [
     },
     {
         path: '/products',
+        alias: '/',
         name: 'products',
         meta: { nav: 'product' },
         component: () => import('../views/Products.vue')
@@ -53,16 +53,22 @@ const routes = [
         component: () => import('../views/ProductDetails.vue')
     },
     {
+        path: '/products/:id/edit-stock',
+        name: 'edit-stock',
+        meta: { nav: 'product' },
+        component: () => import('../views/EditStock.vue')
+    },
+    {
+        path: '/scan/:action',
+        name: 'scan',
+        meta: { nav: 'scan' },
+        component: () => import('../views/Scan.vue')
+    },
+    {
         path: '/calendar',
         name: 'calendar',
         meta: { nav: 'calendar' },
         component: () => import('../views/Calendar.vue')
-    },
-    {
-        path: '/scan',
-        name: 'scan',
-        meta: { nav: 'scan' },
-        component: () => import('../views/Scan.vue')
     },
     {
         name: 'users',

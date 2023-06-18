@@ -24,12 +24,11 @@ const props = defineProps({
     <span class="h5"> {{ props.workshop.name }} </span>
 
     <div v-if="!props.edit" class="ms-auto">
-      <!-- workshop stock status -->
-      <font-awesome-icon :icon="['fas', 'check']" class="fa-1x rounded-circle p-1 m-4 bg-success text-white" style="width:20px;height:20px;"/>
+      <slot />
     </div>
     <div v-else class="ms-auto">
       <!-- edit mode buttons -->
-      <button class="btn p-2 hover-darken" @click.prevent="emit('delete', workshop)">
+      <button class="btn p-2 hover-darken" @click.prevent="emit('delete', workshop)" title="Verwijder Workshop">
         <font-awesome-icon :icon="['fas', 'trash']" class="scale-up-center fa-xl rounded-circle p-3 bg-danger text-white"/>
       </button>
     </div>

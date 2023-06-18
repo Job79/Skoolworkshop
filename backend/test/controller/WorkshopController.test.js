@@ -5,8 +5,8 @@ import { WorkshopController } from '../../src/controller/WorkshopController.js'
 
 describe('controller/WorkshopController', () => {
     const workshops = [
-        { id: 1, name: 'Workshop 1' },
-        { id: 2, name: 'Workshop 2' }
+        { id: 1, name: 'Workshop 1', defaultGroupSize: 3 },
+        { id: 2, name: 'Workshop 2', defaultGroupSize: 4 }
     ]
 
     describe('all', () => {

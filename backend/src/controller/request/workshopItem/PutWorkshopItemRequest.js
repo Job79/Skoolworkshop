@@ -4,7 +4,7 @@ export class PutWorkshopItemRequest extends Request {
     schema = {
         type: 'object',
         additionalProperties: false,
-        required: ['workshopId', 'productId', 'quantity'],
+        required: ['workshopId', 'productId', 'people', 'quantity'],
         properties: {
             workshopId: { type: 'number' },
             productId: { type: 'number' },

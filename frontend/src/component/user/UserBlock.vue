@@ -26,7 +26,7 @@ const props = defineProps({
 
     <div v-if="props.edit" class="ms-auto">
       <!-- edit mode buttons -->
-      <button class="btn p-2 hover-darken" v-if="user.role !== 'admin'" @click.prevent="emit('delete', user)">
+      <button class="btn p-2 hover-darken" v-if="user.role !== 'admin'" @click.prevent="emit('delete', user)" title="Verwijder Gebruiker">
         <font-awesome-icon :icon="['fas', 'trash']" class="scale-up-center fa-xl rounded-circle p-3 bg-danger text-white"/>
       </button>
     </div>
