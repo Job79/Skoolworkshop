@@ -10,8 +10,8 @@ const timerService = new TimerService(db)
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'nlskoolworkshop@gmail.com',
-        pass: 'Avans55!'
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
     }
 })
 
