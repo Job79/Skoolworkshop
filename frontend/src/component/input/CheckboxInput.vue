@@ -20,20 +20,21 @@ watch(() => props.value, (newValue) => {
 })
 
 function update () {
+    checked.value = !checked.value
     emit('update:value', checked.value)
 }
 </script>
 
 <template>
-  <div class="d-flex align-items-center border-bottom">
+  <div class="d-flex align-items-center px-2 py-1 border-bottom">
     <span class="mx-3">{{ name }}</span>
 
     <div class="ms-auto d-flex align-items-center">
-      <div role="button" @click="checked = !checked; update()" class="user-select-none">
+      <button @click="update" class="btn btn-sm border-0" title="herbruikbaar toggle">
         <font-awesome-icon
             :icon="checked ? ['fas', 'toggle-on'] : ['fas', 'toggle-off']"
-            class="fa-2x p-3 mx-2 rounded-3" />
-      </div>
+            class="fa-2x p-2 rounded-3" />
+      </button>
     </div>
   </div>
 </template>

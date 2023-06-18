@@ -14,14 +14,11 @@ const props = defineProps({
     }
 })
 
-// create a copy of the value prop to be able to edit it
-// without directly changing the prop
 const value = ref(props.value)
+const edit = ref(value.value === '')
 watch(() => props.value, (newValue) => {
     value.value = newValue
 })
-
-const edit = ref(value.value === '')
 
 function update () {
     if (!edit.value) {
@@ -44,18 +41,18 @@ function focusOut () {
 </script>
 
 <template>
-  <div class="d-flex align-items-center p-2 border-bottom">
+  <div class="d-flex align-items-center px-2 py-1 border-bottom">
     <span class="mx-3">{{ name }}</span>
 
     <div class="ms-auto d-flex align-items-center">
       <span v-if="!edit">{{ value }}</span>
       <input v-else type="text" class="form-control" v-model="value" @keydown.enter="update" @blur="focusOut" autofocus/>
-      <div role="button" @click="update" class="user-select-none">
+      <button @click="update" class="btn btn-sm border-0" title="aanpassen">
         <font-awesome-icon
             :icon="['fas', 'pen']"
-            class="p-3 mx-2 rounded-3 hover-darken"
+            class="p-3 rounded-3 hover-darken"
             :class="{'bg-secondary': edit}"/>
-      </div>
+      </button>
     </div>
   </div>
 </template>
