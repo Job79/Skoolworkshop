@@ -14,6 +14,7 @@ const workshopStore = useWorkshopStore()
 const workshopItemStore = useWorkshopItemStore()
 const productStore = useProductStore()
 const workshopId = Number(route.params.id)
+const showPopup = ref(false)
 
 const tasks = await Promise.all([
     workshopStore.get(workshopId),
@@ -24,6 +25,7 @@ const tasks = await Promise.all([
 const workshop = ref(tasks[0])
 const items = tasks[1]
 const products = productStore.getMany(items.map(item => item.productId))
+const amountOfPeople = ref(0)
 
 async function save () {
     const { id, ...data } = workshop.value
@@ -33,6 +35,27 @@ async function save () {
 async function saveItem (item) {
     const { id, ...data } = item
     await workshopItemStore.update(data, id)
+}
+
+async function saveProduct (product) {
+    const { id, ...data } = product
+    await productStore.update(data, id)
+}
+
+function removeAllProducts () {
+    for (let i = 0; i < products.length; i++) {
+      if (!products[i].reusable) {
+        products[i].stock -= Math.round(amountOfPeople.value / (items[i].people / items[i].quantity))
+        console.log(Math.round(amountOfPeople.value / (items[i].people / items[i].quantity)))
+        if (products[i].stock < 0) {
+          products[i].stock = 0
+          showPopup.value = false
+          throw Error(products[i].name + ' heeft niet genoeg voorraad')
+        }
+        saveProduct(products[i])
+      }
+    }
+    showPopup.value = false
 }
 </script>
 
@@ -62,6 +85,9 @@ async function saveItem (item) {
 
     <div class="col-10 d-flex align-items-center justify-content-end">
       <!-- action buttons -->
+      <div type="button" class="btn p-3 hover-darken" @click="showPopup = !showPopup">
+        <font-awesome-icon :icon="['fas', 'boxes-packing']" class="fa-xl"/>
+      </div>
       <router-link class="btn p-3 hover-darken" :to="`/products/new?workshopId=${workshop.id}`">
         <font-awesome-icon :icon="['fas', 'plus']" class="fa-xl"/>
       </router-link>
@@ -69,6 +95,14 @@ async function saveItem (item) {
         <font-awesome-icon :icon="['fas', 'pen-to-square']" class="fa-xl"/>
       </router-link>
     </div>
+  </div>
+
+  <!-- conformation pop up -->
+  <div v-if="showPopup" class="conformation-popup">
+    <h2>Hoeveel personen?</h2>
+    <number-input name="Aantal mensen" v-model:value="amountOfPeople" class="mb-3"/>
+    <div type="button" class="btn btn-danger me-4" @click="showPopup = false">Annuleren</div>
+    <div type="button" class="btn btn-primary ms-4" @click="removeAllProducts" style="color: white">Accepteren</div>
   </div>
 
   <div class="row box bg-white border-top">
