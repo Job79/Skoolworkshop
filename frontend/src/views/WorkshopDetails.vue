@@ -85,13 +85,13 @@ function removeAllProducts () {
 
     <div class="col-10 d-flex align-items-center justify-content-end">
       <!-- action buttons -->
-      <div type="button" class="btn p-3 hover-darken" @click="showPopup = !showPopup">
+      <div type="button" class="btn p-3 hover-darken" @click="showPopup = !showPopup" title="Verminder stock alle producten">
         <font-awesome-icon :icon="['fas', 'boxes-packing']" class="fa-xl"/>
       </div>
-      <router-link class="btn p-3 hover-darken" :to="`/products/new?workshopId=${workshop.id}`">
+      <router-link class="btn p-3 hover-darken" :to="`/products/new?workshopId=${workshop.id}`" title="Nieuw product">
         <font-awesome-icon :icon="['fas', 'plus']" class="fa-xl"/>
       </router-link>
-      <router-link class="btn p-3 hover-darken" :to="`/workshops/${workshop.id}/items`">
+      <router-link class="btn p-3 hover-darken" :to="`/workshops/${workshop.id}/items`" title="Producten Beheren">
         <font-awesome-icon :icon="['fas', 'pen-to-square']" class="fa-xl"/>
       </router-link>
     </div>

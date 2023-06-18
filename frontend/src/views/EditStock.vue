@@ -23,12 +23,12 @@ async function update () {
 
 <template>
   <div class="popup-container box text-center bg-white justify-content-center">
-    <router-link type="button" class="btn float-start hover-darken" :to="`/products/${productId}`">
+    <router-link class="btn float-start hover-darken" :to="`/products/${productId}`" title="Navigeer naar product">
       <font-awesome-icon :icon="['fas', 'box']" class="p-2" />
     </router-link>
-    <div type="button" class="btn float-end hover-darken" @click="router.back">
+    <button class="btn float-end hover-darken" @click="router.back" title="Sluiten">
       <font-awesome-icon :icon="['fas', 'x']" />
-    </div>
+    </button>
     <h3 class="pb-3 me-5">{{ product.name }}</h3>
     <div class="d-flex justify-content-center align-items-center pb-3">
       <div class="me-5 iconDivMin">
@@ -50,8 +50,8 @@ async function update () {
       </div>
     </div>
 
-    <div type="button" class="btn btn-primary w-100" @click="update">
+    <button class="btn btn-primary w-100" @click="update">
       Opslaan
-    </div>
+    </button>
   </div>
 </template>

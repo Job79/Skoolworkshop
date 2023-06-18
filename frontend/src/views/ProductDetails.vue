@@ -67,7 +67,7 @@ function requiredProductAmount (calendarItem) {
     <url-input name="Winkel Url" v-model:value="product.shopUrl" @update:value="save"/>
 
     <number-input name="Voorraad" v-model:value="product.stock" @update:value="save">
-      <router-link class="d-flex align-items-center user-select-none" role="button"
+      <router-link class="d-flex align-items-center user-select-none"
                    :to='`/products/${productId}/edit-stock`'>
         <font-awesome-icon
             :icon="['fas', 'layer-group']"
@@ -88,10 +88,10 @@ function requiredProductAmount (calendarItem) {
 
     <div class="col-8 d-flex align-items-center justify-content-end">
       <!-- action buttons -->
-      <button class="btn p-3 hover-darken" :class="{'bg-secondary': tab === 'Planning'}" @click="tab = 'Planning'">
+      <button class="btn p-3 hover-darken" :class="{'bg-secondary': tab === 'Planning'}" @click="tab = 'Planning'" title="Planning">
         <font-awesome-icon :icon="['fas', 'calendar-day']" class="fa-xl"/>
       </button>
-      <button class="btn p-3 ms-1 hover-darken" :class="{'bg-secondary': tab === 'Workshops'}" @click="tab = 'Workshops'">
+      <button class="btn p-3 ms-1 hover-darken" :class="{'bg-secondary': tab === 'Workshops'}" @click="tab = 'Workshops'" title="Workshops">
         <font-awesome-icon :icon="['fas', 'people-group']" class="fa-xl"/>
       </button>
     </div>
@@ -109,7 +109,7 @@ function requiredProductAmount (calendarItem) {
     </workshop-block>
   </div>
   <div v-if="tab === 'Planning'" class="row box bg-white border-top">
-    <product-block :product="{...product, name: 'Total'}" :required-stock="requiredStock" class="border-3" />
+    <product-block :product="{...product, name: 'Totaal'}" :required-stock="requiredStock" class="border-3" />
     <calendar-item-block
         v-for="item in calendar"
         :key="item.id"

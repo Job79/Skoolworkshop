@@ -40,7 +40,7 @@ async function create () {
 
     <button class="m-3 ms-auto btn p-2 bg-primary d-flex justify-content-center" @click="create" style="width: 10rem">
       <font-awesome-icon :icon="['fas', 'floppy-disk']" class="fa-xl" />
-      <span class="h5 m-0 ms-3">aanmaken</span>
+      <span class="h5 m-0 ms-3">Aanmaken</span>
     </button>
   </div>
 </template>

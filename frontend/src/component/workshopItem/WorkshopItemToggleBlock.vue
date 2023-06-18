@@ -22,10 +22,10 @@ const props = defineProps({
 
     <div class="ms-auto">
       <!-- relation toggle button -->
-      <button v-if="exists" class="btn p-2 hover-darken" @click.prevent="emit('remove')">
+      <button v-if="exists" class="btn p-2 hover-darken" @click.prevent="emit('remove')" title="Verwijderen">
         <font-awesome-icon :icon="['fas', 'circle-check']" class="fa-2x p-3 text-success" />
       </button>
-      <button v-else class="btn p-2 hover-darken" @click.prevent="emit('add', product)">
+      <button v-else class="btn p-2 hover-darken" @click.prevent="emit('add', product)" title="Toevoegen">
         <font-awesome-icon :icon="['fas', 'circle-plus']" class="fa-2x p-3" />
       </button>
     </div>
