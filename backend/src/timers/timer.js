@@ -52,4 +52,4 @@ setInterval(async () => {
         // Update the lastSent time to now
         lastSent = now
     }
-}, 1000 * 60 * 60)
+}, 1000 * 60 * 5)
