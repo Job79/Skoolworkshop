@@ -10,7 +10,8 @@ const router = useRouter()
 const workshopStore = useWorkshopStore()
 
 const workshop = ref({
-    name: ''
+    name: '',
+    defaultGroupSize: 25
 })
 
 async function create () {
