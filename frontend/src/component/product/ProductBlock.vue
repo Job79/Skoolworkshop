@@ -41,16 +41,16 @@ const stockColor = computed(() => {
     <span class="h5"> {{ props.product.name }} </span>
 
     <div v-if="!props.edit" class="ms-auto">
-      <div class="p-3 rounded-circle" :class="stockColor">
-        <font-awesome-icon :icon="['fas', 'warehouse']" class="fa-1x px-2" />
+      <div class="p-3 rounded-circle" :class="stockColor" style="width: max-content">
+        <font-awesome-icon :icon="['fas', 'warehouse']" class="fa-1x px-1" />
         <span class="p-1">{{ props.product.stock }}</span>
-        <span class="p-1">/</span>
+        <span>/</span>
         <span class="p-1">{{ props.requiredStock + props.product.bufferStock }}</span>
       </div>
     </div>
     <div v-else class="ms-auto">
       <!-- edit mode buttons -->
-      <button class="btn p-2 hover-darken" @click.prevent="emit('delete', product)">
+      <button class="btn p-2 hover-darken" @click.prevent="emit('delete', product)" title="Verwijder Product">
         <font-awesome-icon :icon="['fas', 'trash']" class="scale-up-center fa-xl rounded-circle p-3 bg-danger text-white"/>
       </button>
     </div>

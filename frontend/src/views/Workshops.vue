@@ -28,7 +28,7 @@ async function remove (workshop) {
         <font-awesome-icon :icon="['fas', 'plus']" class="fa-xl"/>
       </router-link>
 
-      <button class="btn p-3 hover-darken" :class="{ 'bg-primary': edit }" @click="edit = !edit">
+      <button class="btn p-3 hover-darken" :class="{ 'bg-primary': edit }" @click="edit = !edit" title="Workshops Aanpassen">
         <font-awesome-icon :icon="['fas', 'pen-to-square']" class="fa-xl"/>
       </button>
     </div>

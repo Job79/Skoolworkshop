@@ -44,7 +44,7 @@ async function create () {
 
   <div class="row box bg-white border-top">
     <text-input name="Name" v-model:value="user.name" />
-    <password-input name="Password" v-model:value="user.password" :empty="true" />
+    <password-input name="Password" v-model:value="user.password" :start-open="true" />
     <options-input name="Role" v-model:value="user.role" :options="roles" />
 
     <button class="m-3 ms-auto btn p-2 bg-primary d-flex justify-content-center" @click="create" style="width: 10rem">

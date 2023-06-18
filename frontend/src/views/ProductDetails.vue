@@ -42,6 +42,11 @@ async function save () {
     const { id, ...data } = product.value
     await productStore.update(data, id)
 }
+
+function requiredProductAmount (calendarItem) {
+    const workshopItem = workshopItems.value.find(item => item.workshopId === calendarItem.workshopId)
+    return Math.ceil(calendarItem.participantCount / workshopItem.people) * workshopItem.quantity
+}
 </script>
 
 <template>
@@ -62,7 +67,7 @@ async function save () {
     <url-input name="Winkel Url" v-model:value="product.shopUrl" @update:value="save"/>
 
     <number-input name="Voorraad" v-model:value="product.stock" @update:value="save">
-      <router-link class="d-flex align-items-center user-select-none" role="button"
+      <router-link class="d-flex align-items-center user-select-none"
                    :to='`/products/${productId}/edit-stock`'>
         <font-awesome-icon
             :icon="['fas', 'layer-group']"
@@ -71,7 +76,7 @@ async function save () {
     </number-input>
 
     <number-input name="Buffer Voorraad" v-model:value="product.bufferStock" @update:value="save" :border="true"/>
-    <checkbox-input name="Herbruikbaar" v-model:value="product.reusable" @update:value="save"/>
+    <checkbox-input name="Herbruikbaar" v-model:value="product.reusable" @update:value="[save(), calendarStore.fetchRequiredStock()]"/>
     <scan-input v-model:value="product.code" @update:value="save"/>
   </div>
 
@@ -83,10 +88,10 @@ async function save () {
 
     <div class="col-8 d-flex align-items-center justify-content-end">
       <!-- action buttons -->
-      <button class="btn p-3 hover-darken" :class="{'bg-secondary': tab === 'Planning'}" @click="tab = 'Planning'">
+      <button class="btn p-3 hover-darken" :class="{'bg-secondary': tab === 'Planning'}" @click="tab = 'Planning'" title="Planning">
         <font-awesome-icon :icon="['fas', 'calendar-day']" class="fa-xl"/>
       </button>
-      <button class="btn p-3 ms-1 hover-darken" :class="{'bg-secondary': tab === 'Workshops'}" @click="tab = 'Workshops'">
+      <button class="btn p-3 ms-1 hover-darken" :class="{'bg-secondary': tab === 'Workshops'}" @click="tab = 'Workshops'" title="Workshops">
         <font-awesome-icon :icon="['fas', 'people-group']" class="fa-xl"/>
       </button>
     </div>
@@ -104,11 +109,12 @@ async function save () {
     </workshop-block>
   </div>
   <div v-if="tab === 'Planning'" class="row box bg-white border-top">
-    <product-block :product="{...product, name: 'Total'}" :required-stock="requiredStock" class="border-3" />
+    <product-block :product="{...product, name: 'Totaal'}" :required-stock="requiredStock" class="border-3" />
     <calendar-item-block
         v-for="item in calendar"
         :key="item.id"
         :workshop="workshops.find((w) => w.id === item.workshopId)"
-        :item="item" />
+        :item="item"
+        :product-amount="requiredProductAmount(item)" />
   </div>
 </template>

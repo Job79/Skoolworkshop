@@ -18,14 +18,11 @@ const props = defineProps({
     }
 })
 
-// create a copy of the value prop to be able to edit it
-// without directly changing the prop
+const edit = ref(props.startOpen)
 const value = ref(props.value)
 watch(() => props.value, (newValue) => {
     value.value = newValue
 })
-
-const edit = ref(props.startOpen)
 
 function isValidUrl (string) {
     try {
@@ -61,29 +58,23 @@ function focusOut () {
 </script>
 
 <template>
-  <div class="d-flex align-items-center p-2 border-bottom">
+  <div class="d-flex align-items-center px-2 py-1 border-bottom">
     <span class="mx-3">{{ name }}</span>
 
     <div class="ms-auto d-flex align-items-center">
       <div v-if="!edit" >
-        <a v-if="value" :href="value" target="_blank" class="d-flex align-items-center" style="max-width: 10rem">
+        <a v-if="value" :href="value" target="_blank" class="d-flex align-items-center" style="max-width: 10rem" title="open link">
           <span class="text-truncate">{{ value }}</span>
           <font-awesome-icon :icon="['fas', 'external-link-alt']" class="p-1"/>
         </a>
       </div>
       <input v-else type="text" class="form-control" v-model="value" @keydown.enter="update" @blur="focusOut" autofocus/>
-      <div role="button" @click="update" class="user-select-none">
+      <button @click="update" class="btn btn-sm border-0" title="aanpassen">
         <font-awesome-icon
-            v-if="value"
-            :icon="['fas', 'pen']"
-            class="p-3 mx-2 rounded-3 hover-darken"
-            :class="{'bg-secondary': edit}"/>
-        <font-awesome-icon
-            v-else
-            :icon="['fas', 'plus']"
-            class="p-3 mx-2 rounded-3 hover-darken"
-            :class="{'bg-secondary': edit}"/>
-      </div>
+            :icon="value ? ['fas', 'pen'] : ['fas', 'plus']"
+            class="p-3 rounded-3 hover-darken"
+            :class="{'bg-secondary': edit}" />
+      </button>
     </div>
   </div>
 </template>

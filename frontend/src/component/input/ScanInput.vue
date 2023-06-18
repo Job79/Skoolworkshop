@@ -42,26 +42,26 @@ function printQr () {
 </script>
 
 <template>
-  <div type="button" class="d-flex align-items-center p-2 border-bottom">
+  <div type="button" class="d-flex align-items-center px-2 py-1 border-bottom">
     <span class="mx-3">QR/Bar Code</span>
 
     <div class="ms-auto d-flex align-items-center">
-      <div class="d-flex align-items-center user-select-none" role="button" @click="showScanner = !showScanner">
+      <button class="btn btn-sm border-0 d-flex align-items-center" @click="showScanner = !showScanner" title="Scan QR/Bar code">
         <font-awesome-icon
           :icon="['fas', 'qrcode']"
           class="p-3 mx-1 rounded-3 hover-darken"/>
-      </div>
+      </button>
 
-      <div v-if="!value" class="d-flex align-items-center user-select-none" role="button" @click="generateCode">
+      <button v-if="!value" class="btn btn-sm border-0 d-flex align-items-center" @click="generateCode" title="Genereer random code">
         <font-awesome-icon
           :icon="['fas', 'shuffle']"
-          class="p-3 mx-1 rounded-3 hover-darken"/>
-      </div>
-      <div v-else class="d-flex align-items-center user-select-none" role="button" @click="printQr">
+          class="fa-1x p-3 rounded-3 hover-darken"/>
+      </button>
+      <button v-else class="btn btn-sm border-0 d-flex align-items-center" @click="printQr" title="Print QR code">
         <font-awesome-icon
             :icon="['fas', 'print']"
-            class="p-3 mx-1 rounded-3 hover-darken"/>
-      </div>
+            class="fa-1x p-3 rounded-3 hover-darken"/>
+      </button>
     </div>
   </div>
 
@@ -71,7 +71,7 @@ function printQr () {
         </div>
   </div>
 
-  <div id="qrCode" style="display: none">
+  <div id="qrCode" class="d-none">
     <vue-qrcode
         v-if="props.value"
         :value="props.value"
