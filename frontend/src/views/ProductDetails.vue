@@ -76,7 +76,7 @@ function requiredProductAmount (calendarItem) {
     </number-input>
 
     <number-input name="Buffer Voorraad" v-model:value="product.bufferStock" @update:value="save" :border="true"/>
-    <checkbox-input name="Herbruikbaar" v-model:value="product.reusable" @update:value="save"/>
+    <checkbox-input name="Herbruikbaar" v-model:value="product.reusable" @update:value="[save(), calendarStore.fetchRequiredStock()]"/>
     <scan-input v-model:value="product.code" @update:value="save"/>
   </div>
 
