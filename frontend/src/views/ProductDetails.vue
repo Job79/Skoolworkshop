@@ -42,6 +42,11 @@ async function save () {
     const { id, ...data } = product.value
     await productStore.update(data, id)
 }
+
+function requiredProductAmount (calendarItem) {
+    const workshopItem = workshopItems.value.find(item => item.workshopId === calendarItem.workshopId)
+    return Math.ceil(calendarItem.participantCount / workshopItem.people) * workshopItem.quantity
+}
 </script>
 
 <template>
@@ -109,6 +114,7 @@ async function save () {
         v-for="item in calendar"
         :key="item.id"
         :workshop="workshops.find((w) => w.id === item.workshopId)"
-        :item="item" />
+        :item="item"
+        :product-amount="requiredProductAmount(item)" />
   </div>
 </template>
