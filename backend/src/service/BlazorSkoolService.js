@@ -7,7 +7,7 @@ export class BlazorSkoolService {
         this.startDate = new Date()
         this.startDate.setDate(this.startDate.getDate() - 7)
         this.endDate = new Date()
-        this.endDate.setMonth(this.endDate.getMonth() + 6)
+        this.endDate.setMonth(this.endDate.getMonth() + 3)
     }
 
     async fetchCalendar () {

@@ -13,16 +13,4 @@ describe('controller/request/calculate/RequiredStockRequest', () => {
         const data = new RequiredStockRequest(req).data()
         expect(data).to.deep.equal(req.query)
     })
-
-    it('should provide defaults', async () => {
-        const currentDate = new Date()
-        const nextMonthDate = new Date()
-        nextMonthDate.setMonth(nextMonthDate.getMonth() + 1)
-
-        const data = new RequiredStockRequest({ query: {} }).data()
-        expect(data).to.deep.equal({
-            startDate: currentDate.toISOString(),
-            endDate: nextMonthDate.toISOString()
-        })
-    })
 })

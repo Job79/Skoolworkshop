@@ -1,5 +1,7 @@
 <script setup>
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { useCalendarStore } from '../../store/calendarStore.js'
+import { computed } from 'vue'
 
 const props = defineProps({
     item: {
@@ -16,22 +18,18 @@ const props = defineProps({
     }
 })
 
-const date = new Date(props.item.endDate)
-const today = new Date()
-const nextMonth = new Date()
-nextMonth.setMonth(nextMonth.getMonth() + 1)
+const calendarStore = useCalendarStore()
+const startDate = new Date(props.item.startDate)
+const endDate = new Date(props.item.endDate)
 
-function formatDate (startDate, endDate) {
-    const ds = new Date(startDate)
-    const de = new Date(endDate)
-    const pad = (num) => String(num).padStart(2, '0')
-    return `${pad(ds.getDate())}-${pad(ds.getMonth() + 1)} ${pad(ds.getHours())}:${pad(ds.getMinutes())} - ${pad(de.getHours())}:${pad(de.getMinutes())}`
-}
+const pad = (num) => String(num).padStart(2, '0')
+const dateStr = computed(() => `${pad(startDate.getDate())}-${pad(startDate.getMonth() + 1)}`)
+const timeStr = computed(() => `${pad(startDate.getHours())}:${pad(startDate.getMinutes())} - ${pad(endDate.getHours())}:${pad(endDate.getMinutes())}`)
 </script>
 
 <template>
   <router-link class="d-flex align-items-center border-bottom hover-darken"
-               :class="{'bg-tint-secondary': date < today || date > nextMonth}"
+               :class="{'bg-tint-secondary': endDate < calendarStore.startDate || endDate > calendarStore.endDate}"
                :to="`/workshops/${workshop.id}`">
 
     <!-- image and title -->
@@ -53,9 +51,12 @@ function formatDate (startDate, endDate) {
       </div>
 
       <div class="ms-auto d-flex align-items-center"
-           :class="{'text-danger': date < today, 'text-primary': date > nextMonth}">
+           :class="{'text-danger': endDate < calendarStore.startDate, 'text-primary': endDate > calendarStore.endDate}">
         <font-awesome-icon :icon="['fas', 'calendar-day']" class="fa-1x" style="width: 2rem"/>
-        <span>{{ formatDate(props.item.startDate, props.item.endDate) }}</span>
+        <div class="d-flex flex-wrap">
+          <span class="me-2">{{ dateStr }}</span>
+          <span>{{ timeStr }}</span>
+        </div>
       </div>
     </div>
   </router-link>
