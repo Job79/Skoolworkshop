@@ -81,13 +81,14 @@ export class CalendarService {
 
     neededReusableProductQuantity (workshopItem, participantCount, overlappingCalendarItems) {
         // Get all the overlappingCalendar items that use the same product, then
-        // sum the total participant count of all those calendar items including
+        // sum the neededProductQuantity of all those calendar items including
         // the current calendar item.
-        const totalParticipantCount = overlappingCalendarItems
+        return overlappingCalendarItems
             .filter((ci) => ci.workshop.items.find((i) => i.product.id === workshopItem.product.id))
-            .reduce((acc, ci) => acc + ci.participantCount, participantCount)
-
-        return this.neededProductQuantity(workshopItem, totalParticipantCount)
+            .reduce(
+                (acc, ci) => acc + this.neededProductQuantity(workshopItem, ci.participantCount),
+                this.neededProductQuantity(workshopItem, participantCount)
+            )
     }
 
     overlappingCalendarItems (calendar, current) {
