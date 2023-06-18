@@ -4,7 +4,6 @@ import 'express-async-errors'
 import cookieParser from 'cookie-parser'
 import { WorkshopController } from './controller/WorkshopController.js'
 import { ProductController } from './controller/ProductController.js'
-import { SubscriptionController } from './controller/SubscriptionController.js'
 import { PrismaClient } from '@prisma/client'
 import { colorConsole } from 'tracer'
 import { LoggerMiddleware } from './middleware/LoggerMiddleware.js'
@@ -16,6 +15,7 @@ import { AuthService } from './service/AuthService.js'
 import { AuthMiddleware } from './middleware/AuthMiddleware.js'
 import { WorkshopItemController } from './controller/WorkshopItemController.js'
 import { CalendarController } from './controller/CalendarController.js'
+
 dotenv.config()
 
 const db = new PrismaClient()
@@ -50,7 +50,7 @@ app
     .post('/api/auth/login', (req, res) => controller.auth.login(req, res))
     .post('/api/auth/token', (req, res) => controller.auth.token(req, res))
     .post('/api/auth/logout', (req, res) => controller.auth.logout(req, res))
-    
+
 app
     .get('/api/workshops', middleware.auth.validate(), (req, res) => controller.workshop.all(req, res))
     .post('/api/workshops', middleware.auth.validate(), (req, res) => controller.workshop.post(req, res))
