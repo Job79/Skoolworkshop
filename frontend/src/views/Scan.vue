@@ -20,7 +20,7 @@ function onDecode (result) {
     if (action === 'redirect') {
         router.push(`/products/${product.id}`)
     } else {
-        router.push(`/products/${product.id}`)
+        router.push(`/products/${product.id}/edit-stock`)
     }
 }
 </script>
