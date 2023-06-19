@@ -17,11 +17,15 @@ const workshops = workshopStore.workshops
 
 <template>
   <div class="row box-header">
-    <div class="col-2 d-flex align-items-center">
+    <div class="d-flex d-sm-none align-items-center p-0" style="width: min-content">
+      <img src="../assets/logo.png" alt="logo" class="py-3 ps-4" style="height: 4rem" />
+    </div>
+
+    <div class="col d-flex align-items-center">
       <h3 class="m-2">Kalender</h3>
     </div>
 
-    <div class="col-10 d-flex align-items-center justify-content-end">
+    <div class="col d-flex align-items-center justify-content-end">
       <!-- action buttons -->
       <button class="btn p-3 hover-darken" @click="calendarStore.refresh()" title="Verversen">
         <font-awesome-icon :icon="['fas', 'arrows-rotate']" class="fa-xl" />
