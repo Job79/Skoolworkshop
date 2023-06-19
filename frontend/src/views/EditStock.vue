@@ -39,7 +39,7 @@ async function update () {
         <p class="mb-0">1</p>
         <font-awesome-icon :icon="['fas', 'minus']" class="icon fa-2x p-0 rounded-3 hover-darken user-select-none" @click="amount--"/>
       </div>
-      <input type="number" class="form-control-plaintext" style="width: 2rem" v-model="amount" @input="update" />
+      <input type="number" class="form-control-plaintext" style="width: 2rem" v-model="amount" />
       <div class="ms-5 iconDivMax">
         <p class="mb-0">1</p>
         <font-awesome-icon :icon="['fas', 'plus']" class="icon fa-2x p-0 rounded-3 hover-darken user-select-none" @click="amount++"/>
