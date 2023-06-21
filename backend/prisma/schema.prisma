@@ -67,5 +67,5 @@ model Calendar {
   startDate        DateTime
   endDate          DateTime
 
-  workshop Workshop @relation(fields: [workshopId], references: [id])
+  workshop Workshop @relation(fields: [workshopId], references: [id], onDelete: Cascade)
 }
