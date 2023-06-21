@@ -30,12 +30,12 @@ const timeStr = computed(() => `${pad(startDate.getHours())}:${pad(startDate.get
 <template>
   <router-link class="d-flex align-items-center border-bottom hover-darken"
                :class="{'bg-tint-secondary': endDate < calendarStore.startDate || endDate > calendarStore.endDate}"
-               :to="`/workshops/${workshop.id}`">
+               :to="`/workshops/${workshop?.id ?? 0}`">
 
     <!-- image and title -->
     <font-awesome-icon :icon="['fas', 'people-robbery']" class="fa-3x img border p-3 ms-1 me-3 my-3"
                        style="width: 3rem; height: 3rem"/>
-    <span class="h5 w-50"> {{ props.workshop.name }} </span>
+    <span class="h5 w-50"> {{ props.workshop?.name ?? 'unknown' }} </span>
 
     <div class="ms-auto p-2" style="width: 12rem" @click.prevent>
       <div v-if="productAmount" class="ms-auto d-flex align-items-center">
