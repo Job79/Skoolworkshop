@@ -9,6 +9,8 @@ CREATE TABLE `User` (
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
+INSERT INTO `User` (`name`, `password`, `role`) VALUES ('admin', '$argon2id$v=19$m=65536,t=3,p=4$M++f1tL4k21dsjIxdmOh7Q$5JEGmQRzKluZwzq1NsdMclz0RcftI6ifzVSHhlv4m0M', 'admin');
+
 -- CreateTable
 CREATE TABLE `Session` (
     `id` VARCHAR(191) NOT NULL,
