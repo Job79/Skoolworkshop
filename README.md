@@ -2,7 +2,7 @@
 
 Inventory management system for [skoolworkshop](https://skoolworkshop.nl).
 Keeps track of products stored in the warehouse and shows which products are
-needed for a workshop. The scrumboard of this project can be found [here.](https://scrum-aei.avans.nl:8443/secure/RapidBoard.jspa)
+needed for a workshop. 
 
 ## Backend
 
